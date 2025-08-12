@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+# Expo
+.expo/
+.expo-shared/
+# Android/iOS build folders
+android/
+ios/
+# Env files
+.env
