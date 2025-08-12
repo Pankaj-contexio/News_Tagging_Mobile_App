@@ -1,0 +1,12 @@
+pandas
+flask
+django
+requests
+pymongo
+pytz
+openpyxl
+boto3
+xhtml2pdf
+pyaudio
+waitress
+dotenv

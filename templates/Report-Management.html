@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link rel="icon" href="https://reinlabs.co.in/wp-content/uploads/2018/07/cropped-Untitled-design-32x32.png" sizes="32x32"> -->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reports Management</title>
+
+    <!-- Bootstrap -->
+    <link href="./static/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="./static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- NProgress -->
+    <link href="./static/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="./static/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="./static/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="./static/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="./static/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="./static/css/custom.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+<!--      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>-->
+
+
+
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>-->
+    <!-- Add these to your head section -->
+
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
+
+  </head>
+<!-- jQuery -->
+    <script src="./static/vendors/jquery/dist/jquery.min.js"></script>
+
+    <!-- JQVMap -->
+    <link href="./static/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <script src="./static/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="./static/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="./static/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+  <!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+
+  <style>
+    .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            height: 220px;
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 22px;
+        }
+        .card p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .list li:last-child {
+            border-bottom: none;
+        }
+
+        .scrollable-list {
+            max-height: 150px; /* Adjust height as needed */
+            overflow-y: auto; /* Enable vertical scroll */
+            border: 1px solid #ccc; /* Optional: Add border */
+            padding: 10px; /* Optional: Add padding */
+            list-style-type: none; /* Remove bullet points */
+            margin: 0; /* Remove default margin */
+        }
+
+        .scrollable-list li {
+            padding: 5px 0; /* Add spacing between list items */
+            border-bottom: 1px solid #eee; /* Optional: Add separator */
+        }
+
+        .scrollable-list li:last-child {
+            border-bottom: none; /* Remove border for the last item */
+        }
+
+
+    .graph-container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .graph-container h2 {
+      margin: 0 0 20px;
+      font-size: 22px;
+    }
+
+    @media (min-width: 769px) {
+    .left_col.scroll-view {
+        left: 0 !important; /* Always show sidebar on desktop */
+    }
+    .mobile-nav-toggle {
+        display: none !important; /* Hide toggle button on desktop */
+    }
+}
+/* Mobile Sidebar Styles */
+.mobile-sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: #2A3F54;
+    transition: all 0.3s ease;
+    z-index: 10000;
+    overflow-y: auto;
+}
+
+.mobile-sidebar.active {
+    left: 0;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+}
+
+.mobile-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: none;
+}
+
+.mobile-sidebar-toggle {
+    position: fixed;
+    left: 20px;
+    top: 10px;
+    z-index: 10001;
+    background: #2A3F54;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-sidebar-toggle {
+        display: block;
+    }
+
+    .mobile-sidebar-overlay.active {
+        display: block;
+    }
+
+    body.sidebar-open {
+        overflow: hidden;
+    }
+}
+    .jqvmap-region {
+            transition: fill 0.3s ease;
+        }
+        .jqvmap-region:hover {
+            cursor: pointer;
+        }
+
+
+    .container2 {
+            display: none;
+            padding: 15px;
+            background: white;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .btn {
+            /* background: #007bff; */
+            color: white;
+            /*padding: 10px 15px; */
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .container2 {
+            background-color: #eff2f6;
+        }
+
+        .form-select {
+    --phoenix-form-select-bg-img: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03NS4zNDggMTI3LjE5MkM3Mi40MzgxIDEyNy4xOTIgNjkuODUxNCAxMjYuMjIyIDY3LjkxMTUgMTI0LjI4Mkw1LjgzMjE1IDYyLjIwMjNDMS42Mjg4NyA1OC4zMjIzIDEuNjI4ODcgNTEuNTMyNCA1LjgzMjE1IDQ3LjY1MjVDOS43MTIxMSA0My40NDkyIDE2LjUwMiA0My40NDkyIDIwLjM4MiA0Ny42NTI1TDc1LjM0OCAxMDIuMjk1TDEyOS45OTEgNDcuNjUyNUMxMzMuODcxIDQzLjQ0OTIgMTQwLjY2MSA0My40NDkyIDE0NC41NDEgNDcuNjUyNUMxNDguNzQ0IDUxLjUzMjQgMTQ4Ljc0NCA1OC4zMjIzIDE0NC41NDEgNjIuMjAyM0w4Mi40NjEzIDEyNC4yODJDODAuNTIxMyAxMjYuMjIyIDc3LjkzNDcgMTI3LjE5MiA3NS4zNDggMTI3LjE5MloiIGZpbGw9IiMzMTM3NEEiLz4KPC9zdmc+Cg==);
+    display: block;
+    width: 100%;
+    padding: .5rem 2.5rem .5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.49;
+    color: var(--phoenix-body-color);
+    appearance: none;
+    background-color: var(--phoenix-emphasis-bg);
+    background-image: var(--phoenix-form-select-bg-img), var(--phoenix-form-select-bg-icon, none);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 9px 12px;
+    border: var(--phoenix-border-width) solid var(--phoenix-border-color);
+    border-radius: .375rem;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
+    transition: border-color .15sease-in-out, box-shadow .15sease-in-out;
+}
+.form-control{
+
+    border-radius: .375rem;
+    transition: border-color .15sease-in-out, box-shadow .15sease-in-out;
+}
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+.popup button {
+    margin: 10px 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    transition: background-color 0.3s;
+
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.popup-header {
+    position: relative;
+    background-color: white;
+    padding-right: 30px; /* extra space for button */
+}
+
+.popup-header h2 {
+    margin: 0;
+    color: #000;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    color: #000;
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#preview-loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+#action-buttons{
+    display: flex;
+      }
+
+
+.upload-box {
+  width: 100%;
+  height: 150px;
+  border: 2px dashed #0d6efd;
+  text-align: center;
+  line-height: 150px;
+  font-size: 18px;
+  position: relative;
+  cursor: pointer;
+}
+
+.upload-box input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+}
+
+.custom-select {
+  border: 1px solid green;
+  color: black;
+}
+
+
+
+.loader2 {
+  --d:22px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  color: #25b09b;
+  box-shadow:
+    calc(1*var(--d))      calc(0*var(--d))     0 0,
+    calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+    calc(0*var(--d))      calc(1*var(--d))     0 2px,
+    calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+    calc(-1*var(--d))     calc(0*var(--d))     0 4px,
+    calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+    calc(0*var(--d))      calc(-1*var(--d))    0 6px;
+  animation: l27 1s infinite steps(8);
+}
+@keyframes l27 {
+  100% {transform: rotate(1turn)}
+}
+
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+      <i class="fa fa-bars"></i>
+  </button>
+  <div class="mobile-sidebar-overlay"></div>
+  <div class="mobile-sidebar" id="mobileSidebar">
+      <div class="navbar nav_title" style="border: 0;">
+          <a href="index.html" class="site_title"><span></span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+
+        </div>
+      <div class="menu_section">
+          <!-- <h3>General</h3> -->
+          <ul class="nav side-menu">
+            <li><a href="/Dashboard">Dashboard</a></li>
+          </ul>
+          <ul class="nav side-menu">
+              <li>
+                  <a href="#"><i class="fa fa-folder"></i> Projects <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" id="project-list-mobile">
+
+                  </ul>
+              </li>
+          </ul>
+
+          <ul class="nav side-menu">
+            <li><a><i class="fa fa-home"></i> Feeds <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+
+                <li><a href="/News">News Feeds</a></li>
+                <li><a href="/SocialMedia">Social Feeds</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <button class="create-project-btn btn btn-primary">+ Create Project</button>
+        </div>
+  </div>
+
+    <div class="container body">
+
+      <div class="main_container">
+
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic" style="padding-top: 20px;">
+                <img src="./static/images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>{{username}},</h2>
+                <ul class="list-unstyled user_data" style="color: white;">
+                       <li>
+                          <i class="fa fa-briefcase user-profile-icon"></i>  {{designation}}
+                        </li>
+                        <li>
+                          <i class="fa fa-building user-profile-icon"></i>  {{company}}
+                        </li>
+                </ul>
+
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+<!--            Nilesh Change -->
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <!-- <h3>General</h3> -->
+                <!--           Nilesh Change -->
+                <ul class="nav side-menu">
+                    <li><a href="/Dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
+                  </ul>
+                <!--           Nilesh Change -->
+                <ul class="nav side-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-folder"></i> Projects <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" id="project-list">
+
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Feeds <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/News">News Feeds</a></li>
+                      <li><a href="/SocialMedia">Social Feeds</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul class="nav side-menu" style="display: none;" id="user-registration">
+                  <li><a href="/register"><i class="fa fa-user"></i> Register User</a></li>
+                </ul>
+                <ul class="nav side-menu" id="qc-done" style="display: none;">
+                    <li><a href="/News?qc_done=all"><i class="fa fa-user"></i>All QC Feeds</a></li>
+                </ul>
+                <ul class="nav side-menu" id="my-qc-done">
+                    <li><a href="/News?qc_done={{username}}"><i class="fa fa-user"></i> My QC Feeds</a></li>
+                </ul>
+                <ul class="nav side-menu" id="punlished-articles">
+                    <li><a href="/News?qc_done=published"><i class="bi bi-send-check-fill"></i> Published Feeds</a></li>
+                </ul>
+                <ul class="nav side-menu">
+                    <li><a href="/reports"><i class="fa fa-file"></i></i> Reports</a></li>
+                </ul>
+
+                <button id="create-project-btn" class="btn btn-primary" onclick="showCreateProjectPopup()">+ Create Project</button>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+            <div class="popup-overlay" id="popupOverlay"></div>
+            <div class="popup" id="popup-create-project">
+              <button class="close-btn" onclick="closePopup()" style="color: #000; background-color: white;">✖</button>
+              <div class="popup-header" style="background-color: white; display: ruby-text;">
+                  <h2 style="color: #000;">Create Project</h2>
+
+              </div>
+
+              <input type="text" style="width: 100%; border: 1px solid black; height: calc(1.5em + .75rem + 2px);" id="project-name-input" placeholder="Enter project name">
+              <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                  <button id="create-project">Create</button>
+                  <div class="error-message" id="error-message"></div>
+                  <button class="close-popup-btn" onclick="closePopup()">Close</button>
+              </div>
+
+          </div>
+          <!-- Delete Confirmation Popup -->
+          <div class="popup" id="popup-delete-project" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background-color: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+            <button class="close-btn" onclick="closeDeletePopup()" style="color: #000; background-color: white; border: none; float: right;">✖</button>
+
+            <div class="popup-header" style="background-color: white; display: ruby-text;">
+                <h2 style="color: #000;">Confirm Delete</h2>
+            </div>
+
+            <p id="delete-popup-message" style="margin: 15px 0;">Are you sure you want to delete this project?</p>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                <button id="confirm-delete-btn" style="background-color: red; color: white;">Delete</button>
+                <button class="close-popup-btn" onclick="closeDeletePopup()">Cancel</button>
+            </div>
+        </div>
+          <div class="popup" id="project-create-success" style="text-align: center;">
+
+              <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" class="bi bi-check-circle" viewBox="0 0 16 16">
+                      <path fill="green" d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708"/>
+                  </svg>
+              </div>
+
+              <p style="margin: 10px 0;">Project created successfully!</p>
+              <button class="close-popup-btn" onclick="closePopup()" style="margin: 5px 0;">Close</button>
+
+          </div>
+          <div class="popup" id="project-deleted-success" style="text-align: center;">
+              <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                      <path fill="red" d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"></path>
+                  </svg>
+              </div>
+              <p style="margin: 10px 0;">Project deleted successfully!</p>
+              <button class="close-popup-btn" onclick="closePopup()" style="margin-top: 5px;">Close</button>
+          </div>
+
+            <!-- Custom Alert Modal -->
+                <div class="modal fade" id="customAlertModal" tabindex="-1" role="dialog" aria-labelledby="customAlertTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="customAlertTitle">Alert</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body" id="customAlertMessage">
+                        This is an alert.
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" onclick="$('#customAlertModal').modal('hide'); location.reload();">OK</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              <div class="popup" id="uploading_loder" style="text-align: center;">
+
+                    <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+                        <div class="loader2" style="margin: 15px;"></div>
+                    </div>
+
+                    <p style="margin: 10px 0;">Uploading...</p>
+
+                </div>
+                <div class="popup" id="fetch-loader" style="text-align: center;">
+
+                        <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+                            <div class="loader2"></div>
+                        </div>
+
+                        <p style="margin: 10px 0;">Loading...</p>
+
+                    </div>
+
+
+              <div class="popup" id="Deleting_loder" style="text-align: center;">
+
+                    <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+                        <div class="loader2" style="margin: 15px;"></div>
+                    </div>
+
+                    <p style="margin: 10px 0;">Deleting...</p>
+
+              </div>
+
+
+
+
+
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small" style="display: none;">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <!--           Nilesh Change -->
+            <div class="nav_menu">
+              <div class="nav toggle">
+                <img src="..\static\images\Foresight logo.jpg" style="width: 75px; height: auto; display: block; margin: 0 auto;">
+              </div>
+          <!--            Nilesh Change -->
+                <nav class="nav navbar-nav">
+
+                <ul class=" navbar-right">
+
+                  <li class="nav-item dropdown open" style="padding-left: 15px;">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                      <img src="./static/images/img.jpg" alt="">{{username}}
+                    </a>
+                    <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+<!--                      <a class="dropdown-item"  href="javascript:;"> Profile</a>-->
+<!--                        <a class="dropdown-item"  href="javascript:;">-->
+<!--                          <span class="badge bg-red pull-right">50%</span>-->
+<!--                          <span>Settings</span>-->
+<!--                        </a>-->
+<!--                    <a class="dropdown-item"  href="javascript:;">Help</a>-->
+                      <a class="dropdown-item"  href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    </div>
+                  </li>
+
+
+                </ul>
+              </nav>
+            </div>
+          </div>
+        <!-- /top navigation -->
+
+
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="x_panel">
+
+
+              <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <!-- Upload Section -->
+                        <div class="x_panel">
+                          <div class="x_title">
+                            <h2>Upload Reports</h2>
+                            <div class="clearfix"></div>
+                          </div>
+
+                          <div class="x_content">
+                            <form id="report-upload-form" enctype="multipart/form-data">
+                              <div class="upload-box" id="upload-box">
+                                <p id="upload-box-text">Drop files here or click to upload</p>
+                                <input type="file" id="report-file" name="file" required>
+                                <div id="file-name-display" style="display:none; padding: 10px;"></div>
+                              </div>
+
+                              <div class="row mt-3">
+                                <div class="col">
+                                  <label for="upload-country">
+                                       Select Country<span style="color: red;">*</span>
+                                    </label>
+                                  <select class="form-control custom-select" id="upload-country" name="country" required>
+                                    <option value="">Select Country</option>
+                                  </select>
+                                </div>
+                                <div class="col">
+                                    <label for="upload-sector">
+                                       Select Sector<span style="color: red;">*</span>
+                                    </label>
+                                  <select class="form-control custom-select" id="upload-sector" name="sector" required>
+<!--                                    <option value="">Select Sector</option>-->
+                                    <option value="All">All</option>
+                                    <option value="Other">Other</option>
+                                    <option value="Healthcare">Healthcare</option>
+                                    <option value="Security">Security</option>
+                                    <option value="Foreign Policy">Foreign Policy</option>
+                                    <option value="History">History</option>
+                                  </select>
+                                </div>
+                                <div class="col">
+                                    <label for="report_type">
+                                       Select Report Type<span style="color: red;">*</span>
+                                    </label>
+                                  <select class="form-control custom-select" name="report_type" id="report_type" required>
+<!--                                    <option value="">Select Report Type</option>-->
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                    <option value="country profile">Country Profile</option>
+                                    <option value="other">Other</option>
+                                  </select>
+                                </div>
+<!--                                <div class="col">-->
+<!--                                    <label for="report_date">-->
+<!--                                       Select Date<span style="color: red;">*</span>-->
+<!--                                    </label>-->
+<!--                                  <input type="date" class="form-control" name="report_date" id="report_date" required>-->
+<!--                                </div>-->
+
+                                <div class="col">
+                                    <label id="date-label">Select Date</label><span style="color: red;">*</span>
+                                    <input type="date" class="form-control" name="report_date" id="report_date" required>
+                                    <div id="date-range-container" style="display: none; margin-top: 10px;">
+                                        <input type="text" class="form-control" name="report_date_range" id="report_date_range" style="width: 100%;">
+                                    </div>
+                                </div>
+
+                                <div class="col d-flex justify-content-center">
+                                  <button type="submit" class="btn btn-success w-100">Submit</button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <!-- Reports Table -->
+                        <div class="page-title">
+                            <div class="title_left">
+                                <h3>Reports</h3> <!-- Changed from "Form Upload" to "Reports" -->
+                            </div>
+
+                            <div class="title_right">
+                                <div class="col-md-10 col-sm-10 form-group pull-right top_search">
+                                    <div class="input-group">
+                                        <input type="text" id="search-input" class="form-control" placeholder="Search reports...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" id="search-btn" style="background: #26B99A;color: white;">Go!</button>
+                                        </span>
+                                        <button class="btn btn-default" type="button" id="clear-search-btn" style="background: #3677d3;">Clear</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div> <!-- Add this to clear the floats -->
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table" id="report-table">
+                                <thead>
+                                  <tr class="headings">
+                                    <th>Filename</th>
+                                    <th>Report Type</th>
+                                    <th>Country</th>
+                                    <th>Sector</th>
+                                    <th>Upload BY</th>
+                                    <th>Report Date</th>
+                                    <th>Upload Date</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+
+                                <tbody id="reports-table-body">
+                                    <!-- Reports will be loaded here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination -->
+                        <nav>
+                          <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div id="pagination-info" class="text-muted">Showing 0-0 of 0</div>
+                          </div>
+
+                          <ul id="pagination" class="pagination">
+                            <li class="page-item" id="prev-btn">
+                              <a class="page-link" onclick="changePage(-1)">Previous</a>
+                            </li>
+                            <!-- Dynamic page numbers will be inserted here -->
+                            <li class="page-item" id="next-btn">
+                              <a class="page-link" onclick="changePage(1)">Next</a>
+                            </li>
+                          </ul>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+
+
+          </div><!-- x_panel -->
+        </div>
+        <!-- /page content -->
+        </div>
+
+        <!-- footer content -->
+<!--        <footer>-->
+<!--          <div class="pull-right">-->
+<!--            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>-->
+<!--          </div>-->
+<!--          <div class="clearfix"></div>-->
+<!--        </footer>-->
+        <!-- /footer content -->
+      </div>
+    </div>
+
+
+
+<!-- jQuery -->
+<script src="./static/js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="./static/js/bootstrap.bundle.min.js"></script>
+<!-- Custom Theme Scripts -->
+<!-- <script src="../static/js/custom.min.js"></script> -->
+
+<!-- Bootstrap -->
+<script src="./static/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FastClick -->
+<script src="./static/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="./static/vendors/nprogress/nprogress.js"></script>
+<!-- Chart.js -->
+<script src="./static/vendors/Chart.js/dist/Chart.min.js"></script>
+<!-- gauge.js -->
+<script src="./static/vendors/gauge.js/dist/gauge.min.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="./static/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="./static/vendors/iCheck/icheck.min.js"></script>
+<!-- Skycons -->
+<script src="./static/vendors/skycons/skycons.js"></script>
+<!-- Flot -->
+<script src="./static/vendors/Flot/jquery.flot.js"></script>
+<script src="./static/vendors/Flot/jquery.flot.pie.js"></script>
+<script src="./static/vendors/Flot/jquery.flot.time.js"></script>
+<script src="./static/vendors/Flot/jquery.flot.stack.js"></script>
+<script src="./static/vendors/Flot/jquery.flot.resize.js"></script>
+<!-- Flot plugins -->
+<script src="./static/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="./static/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+<script src="./static/vendors/flot.curvedlines/curvedLines.js"></script>
+<!-- DateJS -->
+<script src="./static/vendors/DateJS/build/date.js"></script>
+
+<!-- bootstrap-daterangepicker -->
+<script src="./static/vendors/moment/min/moment.min.js"></script>
+<script src="./static/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!-- Custom Theme Scripts -->
+<!-- <script src="./static/js/custom.min.js"></script> -->
+
+
+<script>
+  let currentUserlevel = "{{ level }}";
+  currentUserlevel = parseInt(currentUserlevel);
+  if (currentUserlevel >= 1){
+      document.getElementById('qc-done').style.display = 'block';
+      document.getElementById('my-qc-done').style.display = 'block';
+      document.getElementById('user-registration').style.display = 'none';
+  }
+  if (currentUserlevel >= 2){
+      document.getElementById('qc-done').style.display = 'block';
+      document.getElementById('my-qc-done').style.display = 'block';
+      document.getElementById('user-registration').style.display = 'block';
+  }
+</script>
+
+  <script>
+  // Add selected posts to a project
+  function closePopup() {
+            document.getElementById("popupOverlay").style.display = "none";
+
+            document.getElementById("popup-create-project").style.display = "none";
+            document.getElementById("project-create-success").style.display = "none";
+            document.getElementById("project-deleted-success").style.display = "none";
+        }
+  function showPopup() {
+            // Show the popup and overlay
+            document.getElementById("popupOverlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
+        }
+    function showCreateProjectPopup() {
+        // Show the popup and overlay
+        document.getElementById("popupOverlay").style.display = "block";
+        document.getElementById("popup-create-project").style.display = "block";
+    }
+</script>
+<script>
+  $(document).ready(function () {
+      $('.side-menu > li > a').on('click', function () {
+          $(this).next('.child_menu').slideToggle();
+          $(this).find('.fa-chevron-down').toggleClass('fa-chevron-up');
+      });
+  });
+</script>
+<script>
+  async function fetchProjects() {
+      const response = await fetch('/api/projects');
+      const projects = await response.json();
+      const projectList = document.getElementById('project-list');
+      projectList.innerHTML = '';
+
+      projects.forEach(project => {
+          const projectItem = document.createElement('li');
+          projectItem.style.display = "flex";
+          projectItem.style.justifyContent = "space-between";
+          projectItem.style.alignItems = "center";
+          projectItem.innerHTML = `
+              <a href="/projects?project_id=${project._id}" data-project-id="${project._id}" class="droppable-project">
+                  ${project.name} (${project.post_count})
+              </a>
+              <button class="delete-project-btn btn btn-danger"
+                                        data-id="${project._id}"
+
+                                        style="font-size: 12px; padding: 6px 6px; line-height: 1; float: inline-end;">
+                                    <i class="fa fa-trash-o" style="margin-right: 2px;"></i>
+                                </button>
+          `;
+          projectItem.setAttribute('data-project-id', project._id);
+          projectItem.addEventListener('dragover', event => event.preventDefault());
+          projectItem.addEventListener('drop', handleProjectDrop); // Use the same drop handler here
+          projectList.appendChild(projectItem);
+      });
+
+      const projectListMobile = document.getElementById('project-list-mobile');
+        projectListMobile.innerHTML = '';
+
+      projects.forEach(project => {
+          const projectItem = document.createElement('li');
+          projectItem.style.display = "flex";
+          projectItem.style.justifyContent = "space-between";
+          projectItem.style.alignItems = "center";
+          projectItem.innerHTML = `
+              <a href="/projects?project_id=${project._id}" data-project-id="${project._id}" class="droppable-project">
+                  ${project.name} (${project.post_count})
+              </a>
+              <button class="delete-project-btn btn btn-sm btn-danger" data-id="${project._id}">✖</button>
+          `;
+          projectItem.setAttribute('data-project-id', project._id);
+          projectItem.addEventListener('dragover', event => event.preventDefault());
+          projectItem.addEventListener('drop', handleProjectDrop); // Use the same drop handler here
+          projectListMobile.appendChild(projectItem);
+      });
+  }
+
+  async function handleProjectDrop(event) {
+      event.preventDefault();
+      const postId = event.dataTransfer.getData('post_id');
+      const postType = event.dataTransfer.getData('post_type');
+      const projectId = event.target.getAttribute('data-project-id');
+
+      if (!projectId) return;
+
+      // Send request to add the post to the project
+      const response = await fetch(`/api/projects/${projectId}/posts`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ post_ids: [postId], post_type: postType })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+          customAlert(result.message); // "Post added to project!"
+          fetchProjects(); // Update project count
+      } else {
+          customAlert(result.message); // "Post Already in this project!"
+      }
+  }
+
+  // Reload project list on page load
+  document.addEventListener('DOMContentLoaded', fetchProjects);
+
+  document.querySelectorAll('#create-project').forEach(button => {
+
+      // Create a new project
+      button.addEventListener('click', async () => {
+          const projectName = document.getElementById('project-name-input').value.trim();
+          if (!projectName) return;
+
+          const response = await fetch('/api/projects', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name: projectName })
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+              fetchProjects(); // Refresh the project list
+              document.getElementById('project-name-input').value = ''; // Clear input field
+              closePopup(); // Close the popup
+
+              document.getElementById('project-create-success').style.display = 'block'; // Hide the create project popup
+              new Promise(resolve => {
+                          setTimeout(() => {
+                              document.getElementById('project-create-success').style.display = 'none';
+                              resolve();
+                      }, 3000);
+                  }).then(() => {
+                      loadprojectNews(result.project_id);
+                  });
+
+          } else {
+              customAlert(result.message);
+          }
+      });
+      });
+
+
+      async function confirmWithCustomPopup(message) {
+        return new Promise((resolve) => {
+            const popup = document.getElementById('popup-delete-project');
+            const msgElem = document.getElementById('delete-popup-message');
+            const confirmBtn = document.getElementById('confirm-delete-btn');
+
+            msgElem.textContent = message;
+
+            const onConfirm = () => {
+                cleanup();
+                resolve(true);
+            };
+
+            const onCancel = () => {
+                cleanup();
+                resolve(false);
+            };
+
+            function cleanup() {
+                confirmBtn.removeEventListener('click', onConfirm);
+                document.querySelector('#popup-delete-project .close-popup-btn').removeEventListener('click', onCancel);
+                document.querySelector('#popup-delete-project .close-btn').removeEventListener('click', onCancel);
+                popup.style.display = 'none';
+            }
+
+            confirmBtn.addEventListener('click', onConfirm);
+            document.querySelector('#popup-delete-project .close-popup-btn').addEventListener('click', onCancel);
+            document.querySelector('#popup-delete-project .close-btn').addEventListener('click', onCancel);
+
+            popup.style.display = 'block';
+        });
+    }
+  // Handle Project Deletion
+  document.addEventListener('click', async function (event) {
+      if (event.target.classList.contains('delete-project-btn')) {
+          const projectId = event.target.getAttribute('data-id');
+          // const confirmDelete = confirm("Are you sure you want to delete this project?");
+          const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this project?");
+
+          if (!confirmDelete) return;
+
+          try {
+              const response = await fetch(`/api/projects/${projectId}/delete`, {
+                  method: 'DELETE',
+                  headers: { 'Accept': 'application/json' }
+              });
+
+              if (!response.ok) {
+                  throw new Error(`Error ${response.status}: ${response.statusText}`);
+              }
+
+              const result = await response.json();
+
+
+              if (result.success) {
+                  fetchProjects(); // Refresh the project list
+                  document.getElementById('project-deleted-success').style.display = 'block'; // Show success message
+              }
+          } catch (error) {
+              customAlert("Failed to delete project: " + error.message);
+          }
+      }
+  });
+</script>
+<script>
+  // Mobile Sidebar JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+ const sidebar = document.getElementById('mobileSidebar');
+ const toggleBtn = document.querySelector('.mobile-sidebar-toggle');
+ const overlay = document.querySelector('.mobile-sidebar-overlay');
+
+ function toggleSidebar() {
+     sidebar.classList.toggle('active');
+     overlay.classList.toggle('active');
+     document.body.classList.toggle('sidebar-open');
+ }
+
+ // Toggle button click
+ if(toggleBtn) {
+     toggleBtn.addEventListener('click', function(e) {
+         e.stopPropagation();
+         toggleSidebar();
+     });
+ }
+
+ // Overlay click
+ if(overlay) {
+     overlay.addEventListener('click', function(e) {
+         toggleSidebar();
+     });
+ }
+
+ // Close when clicking outside on mobile
+ sidebar.addEventListener('click', function(e) {
+     e.stopPropagation();
+ });
+
+ // Close on resize (optional)
+ window.addEventListener('resize', function() {
+     if(window.innerWidth > 768 && sidebar.classList.contains('active')) {
+         toggleSidebar();
+     }
+ });
+});
+</script>
+<script>
+  function customAlert(message, title = "Alert") {
+    document.getElementById('customAlertTitle').textContent = title;
+    document.getElementById('customAlertMessage').textContent = message;
+    $('#customAlertModal').modal({
+        backdrop: false,
+        keyboard: true,
+        show: true
+      });
+  }
+</script>
+
+<script>
+
+async function getFiltersData() {
+  const res = await fetch(`/api/filters`);
+  const data = await res.json();
+
+  const populateSelect = (id, options) => {
+    const select = document.getElementById(id);
+    options.forEach(item => {
+      const opt = document.createElement('option');
+      opt.value = item.name;
+      opt.textContent = item.name;
+      select.appendChild(opt);
+    });
+  };
+
+  populateSelect('upload-country', data.country);
+  populateSelect('upload-sector', data.sector);
+}
+document.addEventListener("DOMContentLoaded", getFiltersData);
+</script>
+  <script>
+let allReports = []; // Store all reports for client-side filtering
+let filteredReports = []; // Store filtered reports
+let currentPage = 1;
+let pageSize = 10;
+let totalPages = 0;
+let currentSearchTerm = '';
+
+
+function loadReports(page = 1, pageSizeParam = 10) {
+    let url = `/api/get_reports?page=${page}&pageSize=${pageSizeParam}`;
+
+    // Add search term to URL if exists
+    if (currentSearchTerm) {
+        url += `&search=${encodeURIComponent(currentSearchTerm)}`;
+    }
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            currentPage = page;
+            pageSize = pageSizeParam;
+            totalPages = Math.ceil(data.totalCount / pageSize);
+
+            renderTable(data.reports);
+            updatePaginationInfo(page, data.reports.length, data.totalCount);
+            renderPagination(totalPages, currentPage);
+        });
+}
+
+
+
+function renderTable(reports) {
+    const tbody = document.querySelector('#reports-table-body');
+    tbody.innerHTML = '';
+
+    reports.forEach(r => {
+
+        let dateDisplay = r.report_date;
+        if (r.report_type.toLowerCase() === 'weekly' || r.report_type.toLowerCase() === 'monthly') {
+            if (r.report_date.includes(' to ')) {
+                const [startDate, endDate] = r.report_date.split(' to ');
+                dateDisplay = `
+                    <div class="date-range">
+                        <div>${startDate} to</div>
+                        <div>${endDate}</div>
+                    </div>`;
+            }
+            else if (r.report_end_date) {
+                dateDisplay = `
+                    <div class="date-range">
+                        <div>${startDate} to</div>
+                        <div>${endDate}</div>
+                    </div>`;
+            }
+
+        }
+
+        tbody.innerHTML += `
+          <tr>
+            <td>${r.original_filename}</td>
+            <td>${r.report_type}</td>
+            <td>${r.country || ''}</td>
+            <td>${r.sector || ''}</td>
+            <td>${r.uploaded_by}</td>
+            <td>${dateDisplay}</td>
+            <td>${r.upload_date}</td>
+            <td>
+              <a href="${r.path}" class="btn btn-sm btn-success">Download</a>
+              <button class="btn btn-sm btn-danger" onclick="deleteReport('${r.id}')">Delete</button>
+            </td>
+          </tr>`;
+    });
+}
+
+function updatePaginationInfo(page, numItems, totalCount) {
+    const start = totalCount === 0 ? 0 : (page - 1) * pageSize + 1;
+    const end = Math.min(page * pageSize, totalCount);
+
+    document.querySelector('#pagination-info').textContent =
+        `Showing ${start}-${end} of ${totalCount}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadReports(1, 10);
+
+    document.getElementById('search-btn').addEventListener('click', () => {
+        currentSearchTerm = document.getElementById('search-input').value.trim();
+        loadReports(1, pageSize);
+    });
+
+    document.getElementById('clear-search-btn').addEventListener('click', () => {
+        currentSearchTerm = '';
+        document.getElementById('search-input').value = '';
+        loadReports(1, pageSize);
+    });
+
+    document.getElementById('search-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            currentSearchTerm = document.getElementById('search-input').value.trim();
+            loadReports(1, pageSize);
+        }
+    });
+});
+
+
+async function deleteReport(id) {
+  const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this Report?");
+
+  if (!confirmDelete) return;
+
+  document.getElementById("Deleting_loder").style.display = "flex";
+  fetch(`/api/delete_report/${id}`, { method: 'DELETE' })
+    .then(res => res.json())
+    .then(data => {
+
+      document.getElementById("Deleting_loder").style.display = "none";
+      if (data.success) {
+        customAlert("Deleted!");
+        loadReports(1,10);
+      } else {
+        customAlert(data.error);
+      }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadReports(1, 10);
+});
+
+</script>
+
+
+<script>
+document.getElementById('report-upload-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+
+  // Get the appropriate date value based on report type
+    const reportType = document.getElementById('report_type').value;
+
+    if (reportType === 'weekly' || reportType === 'monthly') {
+        const dateRange = document.getElementById('report_date_range').value;
+        if (!dateRange) {
+            customAlert("Please select a date range");
+            return;
+        }
+        formData.set('report_date', dateRange);
+    } else {
+        formData.set('report_date', document.getElementById('report_date').value);
+    }
+
+  const uploadBoxText = document.getElementById('upload-box-text');
+  const fileNameDisplay = document.getElementById('file-name-display');
+  const fileInput = document.getElementById('report-file');
+  if (!fileInput.files.length) return customAlert("Please select a file.");
+
+  document.getElementById("uploading_loder").style.display = "flex";
+
+  try {
+    const res = await fetch('/api/upload_report', {
+      method: 'POST',
+      body: formData
+    });
+    const result = await res.json();
+    if (result.success) {
+      customAlert(result.message);
+      form.reset();
+      loadReports(1,10); // reload table
+      fileNameDisplay.style.display = 'none';
+      uploadBoxText.style.display = 'block';
+
+      // Reset date inputs
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('report_date').value = today;
+        document.getElementById('report_date_range').value = '';
+
+    } else {
+      customAlert(result.error || "Upload failed.");
+      form.reset();
+      loadReports(1,10); // reload table
+      fileNameDisplay.style.display = 'none';
+      uploadBoxText.style.display = 'block';
+      // Reset date inputs
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('report_date').value = today;
+        document.getElementById('report_date_range').value = '';
+    }
+  } catch (err) {
+    customAlert("Upload failed.");
+    console.error(err);
+    form.reset();
+      loadReports(1,10); // reload table
+      fileNameDisplay.style.display = 'none';
+      uploadBoxText.style.display = 'block';
+
+      // Reset date inputs
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('report_date').value = today;
+        document.getElementById('report_date_range').value = '';
+  }
+  document.getElementById("uploading_loder").style.display = "none";
+});
+
+
+function renderPagination(totalPages, currentPage) {
+    const pagination = document.getElementById('pagination');
+    pagination.querySelectorAll('.page-number').forEach(el => el.remove());
+
+    const nextBtn = document.getElementById('next-btn');
+    for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement('li');
+        li.className = `page-item page-number ${i === currentPage ? 'active' : ''}`;
+
+        const a = document.createElement('a');
+        a.className = 'page-link';
+        a.textContent = i;
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadReports(i, pageSize);
+        });
+
+        li.appendChild(a);
+        pagination.insertBefore(li, nextBtn);
+    }
+
+    document.getElementById('prev-btn').classList.toggle('disabled', currentPage === 1);
+    document.getElementById('next-btn').classList.toggle('disabled', currentPage === totalPages);
+}
+
+function changePage(offset) {
+  const newPage = currentPage + offset;
+  if (newPage >= 1 && newPage <= totalPages) {
+    loadReports(newPage, pageSize);
+  }
+}
+
+
+</script>
+<script>
+  const fileInput = document.getElementById('report-file');
+const uploadBoxText = document.getElementById('upload-box-text');
+const fileNameDisplay = document.getElementById('file-name-display');
+
+fileInput.addEventListener('change', () => {
+  if (fileInput.files.length > 0) {
+    const name = fileInput.files[0].name;
+    fileNameDisplay.textContent = name;
+    fileNameDisplay.style.display = 'block';
+    uploadBoxText.style.display = 'none';
+  } else {
+    fileNameDisplay.textContent = '';
+    fileNameDisplay.style.display = 'none';
+    uploadBoxText.textContent = 'Drop files here or click to upload';
+    uploadBoxText.style.display = 'block';
+  }
+});
+
+
+
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Initialize date inputs
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('report_date').value = today;
+
+    // Initialize date range picker
+    $('#report_date_range').daterangepicker({
+        opens: 'right',
+        autoUpdateInput: false,
+        locale: {
+            cancelLabel: 'Clear',
+            format: 'YYYY-MM-DD'
+        }
+    }, function(start, end) {
+        // This callback runs when a date range is selected
+        const reportType = document.getElementById('report_type').value.toLowerCase();
+        const diffDays = end.diff(start, 'days') + 1;
+
+        if (reportType === 'weekly' && diffDays > 7) {
+            customAlert("Weekly reports can't span more than 7 days");
+            return false;
+        }
+
+        if (reportType === 'monthly' && diffDays > 31) {
+            customAlert("Monthly reports can't span more than 31 days");
+            return false;
+        }
+
+        $('#report_date_range').val(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        return true;
+    });
+
+    // Handle date range selection
+    $('#report_date_range').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' to ' + picker.endDate.format('YYYY-MM-DD'));
+        document.getElementById('date-label').textContent = 'Select Date Range';
+    });
+
+    $('#report_date_range').on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+        document.getElementById('date-label').textContent = 'Select Date Range';
+    });
+
+    // Handle report type change
+    document.getElementById('report_type').addEventListener('change', function() {
+        const reportType = this.value;
+        const dateInput = document.getElementById('report_date');
+        const dateRangeContainer = document.getElementById('date-range-container');
+        const dateLabel = document.getElementById('date-label');
+
+        if (reportType === 'weekly' || reportType === 'monthly') {
+            dateInput.style.display = 'none';
+            dateRangeContainer.style.display = 'block';
+            dateLabel.textContent = 'Select Date Range';
+            dateInput.required = false;
+            document.querySelector('input[name="report_date_range"]').required = true;
+        } else {
+            dateInput.style.display = 'block';
+            dateRangeContainer.style.display = 'none';
+            dateLabel.textContent = 'Select Date';
+            dateInput.required = true;
+            document.querySelector('input[name="report_date_range"]').required = false;
+        }
+    });
+
+    // Set default to daily on page load
+    document.getElementById('report_type').value = 'daily';
+    document.getElementById('report_date').style.display = 'block';
+    document.getElementById('date-range-container').style.display = 'none';
+    document.getElementById('date-label').textContent = 'Select Date';
+});
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+{% block title %}Analytics - NewsTagging{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="popup" id="fetch-loader" style="align-items: center;">
+
+            <div class="popup-header" style="background-color: white; display: flex; justify-content: center; padding-left: 10px;">
+                <div class="loader2"></div>
+            </div>
+
+            <p style="margin: 10px 0;">Loading...</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+        <div class="graph-container" style="height: 416px;">
+            <h2>Political Party's Rating By Country</h2>
+            <select id="countrySelector" class="form-select" style="width: 200px; margin-bottom: 20px;">
+            <option value="">Select a country</option>
+            <!-- Options will be populated dynamically -->
+            </select>
+            <div id="partyrating" style="height: 200px;"></div>
+        </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+        <div class="graph-container">
+            <h2>Estimate Political Party Influence</h2>
+            <select id="countrySelector2" class="form-select" style="width: 200px; margin-bottom: 20px;">
+            <option value="">Select a country</option>
+            <!-- Options will be populated dynamically -->
+            </select>
+            <label for="x-axis-type">Select X Axis:</label>
+            <select id="x-axis-type">
+            <option value="month">Month</option>
+            <option value="days">Days in a Month</option>
+            </select>
+
+            <div id="chart-container">
+            <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+        <div class="graph-container">
+            
+            <select id="countrySelector-relationChart" class="form-select" style="width: 200px; margin-bottom: 20px;">
+            <option value="">Select a country</option>
+            <!-- Options will be populated dynamically -->
+            </select>
+            <h2>Foreign Relations Spider Chart</h2>
+            <canvas id="relationChart"></canvas>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script>
+    async function updatecountries(country_news, element) {
+        country_news.forEach(item => {
+            const option = document.createElement('option');
+            let countryid = countries.find(country => country.name === item.country)?.id;
+            option.value = countryid;
+            option.textContent = item.country;
+            if (item.country === 'Bangladesh') {
+                option.selected = true; // Select Nepal by default
+            }
+            element.appendChild(option);
+            
+        });
+    }
+</script>
+<script>
+    async function fetchdata(startDate = null, endDate = null) {
+        document.getElementById("fetch-loader").style.display = "flex";
+        let url = '/api/dashboard';
+        if (startDate && endDate) {
+            url += `?start_date=${startDate}&end_date=${endDate}`;
+        }
+        
+        const dashboardResponse = await fetch(url);
+        const dashboardData = await dashboardResponse.json();
+        const country_news = dashboardData.country_news;
+        let filteredpartyData = dashboardData.party_rating.filter(party => party.country === "country_2");
+        // add countries to the dropdown countrySelector
+        const filtersResponse = await fetch(`/api/filters?type=project'}`);
+        const filtersData = await filtersResponse.json();
+        // Store the fetched filters
+        countries = filtersData.country;
+        const countrySelector = document.getElementById('countrySelector');
+        const countrySelector2 = document.getElementById('countrySelector2');
+        const countrySelector3 = document.getElementById('countrySelector-relationChart');
+        updatecountries(country_news, countrySelector);
+        updatecountries(country_news, countrySelector2);
+        updatecountries(country_news, countrySelector3);
+        
+        document.getElementById("countrySelector").addEventListener("change", function() {
+            const countryid = this.value;
+            let filteredpartyData = dashboardData.party_rating.filter(party => party.country === countryid);
+            createEChartsPieChart('partyrating',
+            filteredpartyData.map(item => item.name),
+            filteredpartyData);
+            
+        });
+
+        document.getElementById("countrySelector2").addEventListener("change", function() {
+            const countryid = this.value;
+            const xaxis = document.getElementById("x-axis-type").value;
+            let filteredpartyData = dashboardData.party_rating.filter(party => party.country === countryid);
+            fetchDataAndRender(xaxis, countryid);
+        });
+
+        drawChart(countries);
+        document.getElementById("countrySelector-relationChart").addEventListener("change", async function() {
+            drawChart(countries);
+        });
+
+        createEChartsPieChart('partyrating',
+            filteredpartyData.map(item => item.name),
+           filteredpartyData);
+        document.getElementById("fetch-loader").style.display = "none";
+    }
+    fetchdata();
+    
+</script>
+
+<script>
+  const ctx = document.getElementById('lineChart').getContext('2d');
+  let chart;
+
+  const fetchDataAndRender = async (xAxisType, country_id) => {
+    try {
+      const response = await fetch(`/api/chart-data?x_axis=${xAxisType}&country_id=${country_id}`);
+      const chartData = await response.json();
+
+      // If chart already exists, destroy it to avoid overlap
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: chartData.labels,
+          datasets: chartData.datasets
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 10
+              }
+            }
+          }
+        }
+      });
+    } catch (error) {
+      console.error('Error loading chart data:', error);
+    }
+  };
+
+  document.getElementById('x-axis-type').addEventListener('change', function () {
+    country_id = document.getElementById('countrySelector2').value || 'country_2'; // Reset to default country
+    fetchDataAndRender(this.value, country_id);
+  });
+
+  // Initial load
+  fetchDataAndRender('month', 'country_2'); // Default to 'month' and 'country_1'
+  
+</script>
+ <script>
+    async function fetchRelationData(countries) {
+      const countryIdToName = {};
+      const countrySelector = document.getElementById('countrySelector-relationChart').value || 'country_2'; // Default to 'country_1' if no selection
+      console.log("Selected country ID:", countrySelector);
+      const res = await fetch("/api/relations?country_id=" + countrySelector);
+      const relationsData = await res.json();
+      countries.forEach(({ id, name }) => {
+        countryIdToName[id] = name;
+      });
+      // Step 2: Replace relation keys with names
+      const transformedData = relationsData.map(entry => {
+        const newRelations = {};
+        for (const [countryId, value] of Object.entries(entry.relations)) {
+          const countryName = countryIdToName[countryId] || countryId; // fallback to ID if name not found
+          newRelations[countryName] = value;
+        }
+        return {
+          country: countryIdToName[entry.country] || entry.country,
+          relations: newRelations
+        };
+      });
+      
+      return transformedData;
+    }
+
+
+    async function drawChart(countries) {
+      const data = await fetchRelationData(countries);
+      
+      // Extract labels and data
+      const labels = Object.keys(data[0].relations);
+      const relationValues = Object.values(data[0].relations);
+
+      // Chart.js Radar Chart
+      const ctx = document.getElementById('relationChart').getContext('2d');
+      const radarChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: `Relations of ${data[0].country}`,
+            data: relationValues,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 20
+              }
+            }
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Country Relations Radar Chart'
+            }
+          }
+        }
+      });
+    }
+</script>
+<script>
+    // Function to create an ECharts pie chart
+  function createEChartsPieChart(containerId, labels, data) {
+    const chart = echarts.init(document.getElementById(containerId));
+    const option = {
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b}: {c} ({d}%)'
+      },
+      
+      series: [
+        {
+          name: '',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '60%'],
+          data: data.map((item, index) => ({
+            value: item.count || item.party_share,
+            name: item.sector || item.site || item.name
+          })),
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+    chart.setOption(option);
+  }
+</script>
+
+{% endblock %}

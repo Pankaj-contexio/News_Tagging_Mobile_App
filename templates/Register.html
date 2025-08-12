@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link rel="icon" href="https://reinlabs.co.in/wp-content/uploads/2018/07/cropped-Untitled-design-32x32.png" sizes="32x32"> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Registerations News Tagging | </title>
+
+    <!-- Bootstrap -->
+    <link href="../static/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../static/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="../static/vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../static/css/custom.min.css" rel="stylesheet">
+    <link href="../static/build/css/custom.min.css" rel="stylesheet">
+    <style>
+      .logo {
+      color: #1877f2;
+      font-size: 56px;
+      margin-bottom: 0;
+    }
+    .tagline {
+    font-size: 12px;
+    color: #1c1e21;
+    margin-top: 0;
+  }
+  .loader2 {
+  --d:22px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  color: #25b09b;
+  box-shadow:
+    calc(1*var(--d))      calc(0*var(--d))     0 0,
+    calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+    calc(0*var(--d))      calc(1*var(--d))     0 2px,
+    calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+    calc(-1*var(--d))     calc(0*var(--d))     0 4px,
+    calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+    calc(0*var(--d))      calc(-1*var(--d))    0 6px;
+  animation: l27 1s infinite steps(8);
+}
+@keyframes l27 {
+  100% {transform: rotate(1turn)}
+}
+    </style>
+  </head>
+
+  <body class="login">
+
+
+
+    <div>
+      <div class="popup" id="fetch-loader" style="text-align: center;">
+
+          <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+              <div class="loader2"></div>
+          </div>
+
+          <p style="margin: 10px 0;">Loading...</p>
+
+      </div>
+      <form class="" action="" method="post" novalidate="">
+        
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h1 class="logo"><strong>ReinLabs</strong></h1>
+          <p class="tagline">RESEARCH | INNOVATION | INCUBATION</p>
+        </div>
+<!--          nilesh change-->
+          <div style="text-align: center; margin-bottom: 20px;">
+              <!-- Flash Messages -->
+                  {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul>
+                      {% for message in messages %}
+                        <li style="color: red;">{{ message }}</li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                  {% endwith %}
+          </div>
+          <!--          nilesh change-->
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Name<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John f. Kennedy" required="required">
+            </div>
+        </div>
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Username<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <!--          nilesh change-->
+                <input class="form-control" name="username" data-validate-length-range="5,15" type="text" required="required"></div>
+            <!--          nilesh change-->
+        </div>
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">email<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control" name="email" required="required" type="email"></div>
+        </div>
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Confirm email address<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="email" name="confirm_email" data-validate-linked="email" required="required"></div>
+        </div>
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Level <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="number" name="level" data-validate-minmax="0,2" required="required"></div>
+        </div>
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">DOB<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="date" name="dob" required="required"></div>
+        </div>
+        <!-- <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Time<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="time" name="time" required="required"></div>
+        </div> -->
+        
+        <div class="field item form-group">
+          <label class="col-form-label col-md-3 col-sm-3  label-align">Password<span class="required">*</span></label>
+          <div class="col-md-6 col-sm-6">
+            <input class="form-control" type="password" id="password1" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*]).{8,}" title="Minimum 8 Characters Including An Upper And Lower Case Letter, A Number And A Unique Character" required="">
+
+            <span style="position: absolute;right:15px;top:7px;" onclick="hideshow()">
+              <i id="slash" class="fa fa-eye-slash"></i>
+              <i id="eye" class="fa fa-eye"></i>
+            </span>
+          </div>
+        </div>
+        
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Repeat password<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="password" name="password2" data-validate-linked="password" required="required"></div>
+        </div>
+        <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <input class="form-control" type="tel" name="mobile" required="required" data-validate-length-range="10,10"></div>
+        </div>
+        <div class="field item form-group">
+          <label class="col-form-label col-md-3 col-sm-3  label-align">Company Name<span class="required">*</span></label>
+          <div class="col-md-6 col-sm-6">
+            <select class="form-control" name="cname" required="required">
+              <option selected value="">Choose option</option>
+              <option value="Contexio" name="contexio">Contexio pvt ltd</option>
+              <option value="Reinlabs" name="reinlabs">Reinlabs</option>
+            </select>
+          </div>  
+        </div>
+        <div class="field item form-group">
+          <label class="col-form-label col-md-3 col-sm-3  label-align">Designation<span class="required">*</span></label>
+          <div class="col-md-6 col-sm-6">
+              <input class="form-control" type="text" name="designation" required="required"></div>
+        </div>
+        <!-- <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">message<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <textarea required="required" name="message"></textarea></div>
+        </div> -->
+        <div class="ln_solid">
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-success">Reset</button>
+                </div>
+            </div>
+        </div>
+      </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../static/vendors/validator/multifield.js"></script>
+    <script src="../static/vendors/validator/validator.js"></script>
+    <script>
+      function hideshow(){
+        var password = document.getElementById("password1");
+        var slash = document.getElementById("slash");
+        var eye = document.getElementById("eye");
+        
+        if(password.type === 'password'){
+          password.type = "text";
+          slash.style.display = "block";
+          eye.style.display = "none";
+        }
+        else{
+          password.type = "password";
+          slash.style.display = "none";
+          eye.style.display = "block";
+        }
+  
+      }
+    </script>
+    <script>
+      // initialize a validator instance from the "FormValidator" constructor.
+      // A "<form>" element is optionally passed as an argument, but is not a must
+      var validator = new FormValidator({
+          "events": ['blur', 'input', 'change']
+      }, document.forms[0]);
+      // on form "submit" event
+      document.forms[0].onsubmit = function(e) {
+          var submit = true,
+              validatorResult = validator.checkAll(this);
+          console.log(validatorResult);
+          return !!validatorResult.valid;
+      };
+      // on form "reset" event
+      document.forms[0].onreset = function(e) {
+          validator.reset();
+      };
+      // stuff related ONLY for this demo page:
+      $('.toggleValidationTooltips').change(function() {
+          validator.settings.alerts = !this.checked;
+          if (this.checked)
+              $('form .alert').remove();
+      }).prop('checked', false);
+
+  </script>
+  <script src="../static/vendors/jquery/dist/jquery.min.js"></script>
+  <script src="../static/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/vendors/fastclick/lib/fastclick.js"></script>
+  <script src="../static/vendors/nprogress/nprogress.js"></script>
+  <script src="../static/build/js/custom.min.js"></script>
+  </body>
+</html>

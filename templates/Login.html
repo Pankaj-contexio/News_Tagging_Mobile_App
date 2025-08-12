@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- <link rel="icon" href="https://reinlabs.co.in/wp-content/uploads/2018/07/cropped-Untitled-design-32x32.png" sizes="32x32"> -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEWS TAGGING LOGIN</title>
+  <link rel="stylesheet" href="../static/css/loginpage.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="left-section">
+      
+      
+    
+    </div>
+    
+    <form method="post" class="login-box"  style="align-items: center;">
+      <!-- <div>
+        <h1 class="logo">ReinLabs</h1>
+        <p class="tagline">RESEARCH | INNOVATION | INCUBATION</p>
+      </div> -->
+      <div>
+        <img src="..\static\images\Foresight logo.jpg" style="width: 75px; height: auto; display: block; margin: 0 auto;">
+      </div>
+      
+      <input type="text" placeholder="Username" class="input" name="username" required/>
+      <input type="password" placeholder="Password" class="input" name="password" required/>
+        <!-- Flash Messages -->
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li style="color: red;">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% endwith %}
+      <button class="login-btn"><strong>Log in</strong></button>
+    
+      <!-- <a href="#" class="forgot-link">Forgotten password?</a> -->
+      <hr />
+      <button class="create-btn" style="display: none;">Create new account</button>
+    </form>
+    
+  </div>
+  <footer>
+    <!-- <div class="footer-logo" style="float:inline-end;">
+      <img src="https://reinlabs.co.in/wp-content/uploads/2019/04/Untitled-design-1.png" alt="Rein Labs Logo" />
+      
+    </div> -->
+    <!-- <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Help</a>
+    </div> -->
+    <!-- <div class="social-icons">
+      <a href="#"><img src="../static/images/facebook-icon.png" alt="Facebook" /></a>
+      <a href="#"><img src="../static/images/twitter-icon.png" alt="Twitter" /></a>
+      <a href="#"><img src="../static/images/linkedin-icon.png" alt="LinkedIn" /></a>
+      <a href="#"><img src="../static/images/instagram-icon.png" alt="Instagram" /></a>
+    </div> -->
+    
+    <div class="footer-credits" style="float: inline-end;">
+      <p>&copy; 2025 Rein Labs. All rights reserved.</p>
+      <p>Designed by <a href="https://reinlabs.co.in/">Rein Labs</a></p>
+    </div>
+  </footer>
+</body>
+</html>

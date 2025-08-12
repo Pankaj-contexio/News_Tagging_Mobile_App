@@ -1,0 +1,177 @@
+
+.articles-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+
+.article {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    background: #eee;
+}
+
+.recording-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.record-btn {
+    background: magenta;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.record-btn .mic-symbol {
+    margin-right: 5px;
+}
+
+.record-count {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+
+
+.chatbot-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+
+
+.popup-header {
+    display: flex;
+    justify-content: space-between; /* Pushes close button to the right */
+    align-items: center;
+    background: magenta;
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.popup-footer {
+    display: flex;
+    justify-content: space-around;
+    /* padding: 10px; */
+    background: white;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+.popup-footer button {
+    background: magenta;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+
+
+#recordingsList {
+    max-height: 300px; /* Limit height */
+    overflow-y: auto; /* Enables vertical scrolling */
+    padding-right: 5px; /* Space for scrollbar */
+	width: 100%;
+}
+
+.recording-list {
+    max-height: 250px; /* Limits recording list height */
+    overflow-y: auto; /* Enables scrolling */
+    padding-right: 5px; /* Space for scrollbar */
+    width: 100%;
+}
+
+.recording-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.recording-list::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.recording-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+
+.recordingItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    width: 90%;
+	max-width: 320px; /* Ensures recordings fit inside popup */
+}
+
+.audioWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.recordingItem audio {
+    width: 100%;
+    max-width: 250px;
+}
+
+.recording-title {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+
+.deleteButton {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.deleteButton:hover {
+    color: #cc0000;
+}

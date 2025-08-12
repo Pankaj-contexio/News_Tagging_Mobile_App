@@ -1,0 +1,11 @@
+<!-- Chatbot Widget -->
+<div id="chatbot-container">
+  <div id="chatbot-header">Chatbot</div>
+  <div id="chatbot-messages"></div>
+  <form id="chatbot-form">
+    <input type="text" id="chatbot-input" placeholder="Type a message..." autocomplete="off" />
+    <button type="submit">Send</button>
+  </form>
+</div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>

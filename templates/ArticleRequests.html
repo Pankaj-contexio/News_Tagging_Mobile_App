@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article Requests</title>
+    <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Article Requests</h1>
+        <button id="add-article-request-btn" class="btn btn-primary mb-3">Add New Article Request</button>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Status</th>
+                    <th>Requested By</th>
+                    <th>Requested At</th>
+                    <th>Actioned By</th>
+                    <th>Actioned At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="article-requests-table">
+                <!-- Rows will be dynamically populated -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const username = "{{ username }}";  // Pass the username from the backend
+
+        async function fetchArticleRequests() {
+            const response = await fetch('/api/article-requests');
+            const requests = await response.json();
+            const tableBody = document.getElementById('article-requests-table');
+            tableBody.innerHTML = '';
+
+            requests.forEach(request => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${request.url}</td>
+                    <td>${request.status}</td>
+                    <td>${request.requested_by}</td>
+                    <td>${new Date(request.requested_at).toLocaleString()}</td>
+                    <td>${request.actioned_by || 'N/A'}</td>
+                    <td>${request.actioned_at ? new Date(request.actioned_at).toLocaleString() : 'N/A'}</td>
+                    <td>
+                        ${username === "admin" && request.status === "pending" ? `
+                            <button onclick="actionRequest('${request._id}', 'approve')" class="btn btn-success btn-sm">Approve</button>
+                            <button onclick="actionRequest('${request._id}', 'reject')" class="btn btn-danger btn-sm">Reject</button>
+                        ` : 'N/A'}
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        async function actionRequest(requestId, action) {
+            const response = await fetch(`/api/article-requests/${requestId}/action`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action })
+            });
+            const result = await response.json();
+            alert(result.message);
+            if (result.success) fetchArticleRequests();
+        }
+
+        document.getElementById('add-article-request-btn').addEventListener('click', async () => {
+            const url = prompt("Enter the article URL:");
+            if (url) {
+                // Validate the URL using a regular expression
+                const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*\/?$/;
+                if (!urlPattern.test(url)) {
+                    alert("Please enter a valid URL.");
+                    return;
+                }
+
+                // Send the validated URL to the backend
+                const response = await fetch('/api/article-requests', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                const result = await response.json();
+                alert(result.message);
+                if (result.success) fetchArticleRequests();
+            }
+        });
+
+        // Initial load
+        fetchArticleRequests();
+    </script>
+</body>
+</html>

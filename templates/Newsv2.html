@@ -1,0 +1,4078 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <!-- <link rel="icon" href="https://reinlabs.co.in/wp-content/uploads/2018/07/cropped-Untitled-design-32x32.png" sizes="32x32"> -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>News</title>
+    <!-- Bootstrap -->
+    <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="./static/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="./static/css/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="./static/css/prettify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+        <!-- Custom styling plus plugins -->
+    <link href="./static/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/styles-popup.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  
+
+    <style>
+      .card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 5px;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+      .toolbar {
+            margin-bottom: 10px;
+  }
+      .filter-tab button {
+        background: none;
+        border: none;
+        color: white;
+        margin-left: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+      .carousel {
+        position: relative;
+        width: 90%;
+        max-width: 800px;
+        margin: auto;
+        overflow: hidden;
+              }
+
+        .carousel-inner {
+            width: 100%;
+        }
+
+        .carousel-item {
+            text-align: center;
+        }
+
+        .main-img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            margin: auto;
+        }
+
+        .carousel-control-prev, .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .carousel-control-prev {
+            left: 10px;
+        }
+
+        .carousel-control-next {
+            right: 10px;
+        }
+
+        /* Thumbnail Section */
+        .carousel-thumbs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .thumbnail-btn {
+            border: none;
+            background: none;
+            padding: 0;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .thumbnail-btn.active {
+            opacity: 1;
+            border: 2px solid #007bff;
+        }
+
+        .thumbnail-img {
+            width: 50px; /* Ensures uniform thumbnail size */
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block;
+        }
+        .publish-shares .social {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .selected-items {
+          display: flex;
+          flex-wrap: wrap;
+          padding: 10px 8px 8px 0px;
+          gap: 10px;
+      }
+
+      .selected-items span {
+          background-color: #D9D9D9;
+          color: #333;
+          font-size: 15px;
+          line-height: 28px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          height: fit-content;
+      }
+
+      .selected-items span:hover {
+          background-color: #333;
+          color: #fff;
+      }
+      .selected-notes span:hover {
+          background-color: #0056b3;
+      }
+      .dropdown-container {
+          width: 300px;
+          margin-left: 0px 10px 10px 0;
+      }
+      .dropdown {
+          border: none;
+          border-radius: 4px;
+          position: relative;
+          background-color: transparent;
+      }
+      .dropdown-options {
+        max-height: 150px;
+        overflow-y: auto;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: none;
+        position: absolute;
+        width: 100%;
+        background-color: white;
+        border-top: 1px solid #ccc;
+        z-index: 1000;
+    }
+
+    .dropdown-options li {
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .dropdown-options li:hover {
+        background-color: #007BFF;
+        color: white;
+    }
+
+    .dropdown.active .dropdown-options {
+        display: block;
+    }
+    .dropdown-menu {
+    position: absolute;
+    will-change: transform;
+    top: 0;
+    left: 0;
+    transform: translate3d(0px, 30px, 0px);
+    max-height: 300px; /* Increased height for better visibility */
+    overflow-y: auto; 
+    width:fit-content;
+    padding: 8px;
+    background-color: #f9f9f9; /* Softer background for better contrast */
+    border: 1px solid #ddd; /* Adds a subtle border */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+    z-index: 1000; /* Ensures it's above other elements */
+}
+    /*dropdown all css*/
+    .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 5px;
+            z-index: 1;
+            width: max-content;
+        }
+
+        .dropdown-content button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 8px 8px;
+            margin: 1px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+            font-size: smaller;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #45a049;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-btn {
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    /*dropdown all css*/
+    .search-box, .note-box {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid #ccc;
+  }
+  
+  .notes-container, .observations-container, .insights-container{
+    border: 1px solid #000;
+    margin: 20px 0 30px;
+    padding: 30px 25px 0px;
+    width: 100%;
+    position: relative;
+    max-width: 900px;
+}
+.notes-container h2 ,
+.observations-container h2 ,
+.insights-container h2 {
+    font-size: 14px !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: absolute;
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 5px 10px 0;
+    top: -14px;
+    left: 20px;
+}
+.dynamicList li ,
+.observations-dynamicList li ,
+.insights-dynamicList li {
+    color: #000;
+}
+.x_title{
+  background-color: #2A3F54;
+  color: white;
+}
+.x_title span {
+    color: white;
+}
+li .dropdown [type="button"]{
+  background-color: transparent;
+  border: none;
+  margin-top: 5px;
+}
+.x_content {
+    max-height: 70vh; /* Adjust height as needed */
+    overflow-y: auto;  /* Enables vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scroll */
+}
+ul.nav.navbar-right.panel_toolbox li {
+    margin: 0 10px;
+}
+textarea{
+    width:100%;
+}
+.child_menu {
+    display: none;  /* Ensure it's hidden by default */
+    padding-left: 20px;
+}
+.post-notes button ,
+.post-observations button ,
+.post-insights button {
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.color-picker-container {
+    position: relative;
+    display: inline-block;
+}
+
+.color-palette {
+    display: none;
+    gap: 5px;      /* Adds spacing between color boxes */
+    padding: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.color-box {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.colorPicker:focus + .color-palette,
+.color-picker-container:hover .color-palette {
+    display: inline-flex;
+    border-color: #007bff;
+}
+/* Basic style for the color picker input */
+.colorPicker {
+  -webkit-appearance: none; /* Remove default styling in some browsers (like Safari) */
+  appearance: none; /* Remove default styling */
+  width: 50px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Hover effect */
+.colorPicker:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
+}
+
+/* Focus effect for accessibility */
+.colorPicker:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Blue glow when focused */
+}
+
+/* For custom browsers like Firefox, this ensures consistent appearance */
+.colorPicker::-webkit-color-swatch-wrapper {
+  border-radius: 8px;
+}
+
+/* Style for the color preview area (inside the input box) */
+.colorPicker::-webkit-color-swatch {
+  border-radius: 8px;
+}
+#news-count, #social-count{
+    color: #fff;
+    background-color: transparent;
+    border: none;
+}
+
+.remove-from-project-btn{
+    display: none;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 30%;
+    left: 5%;
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+/* Modal Header */
+.modal-content h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Input Field */
+.modal-content input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Save Button */
+.modal-content button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .modal-content h3 {
+        font-size: 18px;
+    }
+
+    .modal-content input[type="text"] {
+        font-size: 14px;
+    }
+
+    .modal-content button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+/* Error Message */
+.error-message {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none; /* Hidden by default */
+}
+.drag-preview {
+    width: 100px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 5px;
+    position: absolute;
+    top: -1000px; /* Hide it offscreen */
+}
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+.popup button {
+    margin: 10px 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    transition: background-color 0.3s;
+
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.popup-header {
+    position: relative;
+    background-color: white;
+    padding-right: 30px; /* extra space for button */
+}
+
+.popup-header h2 {
+    margin: 0;
+    color: #000;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    color: #000;
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+#projectDropdown{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* .left_col.scroll-view {
+    position: fixed;
+    left: -250px;
+    width: 250px;
+    height: 100vh;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    top: 0;
+} */
+.mobile-nav-toggle {
+    display: none;
+    position: fixed;
+    left: 15px;
+    top: 15px;
+    z-index: 1001;
+    background: #2A3F54;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.mobile-nav-backdrop {
+        display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+@media (min-width: 769px) {
+    .left_col.scroll-view {
+        left: 0 !important; /* Always show sidebar on desktop */
+    }
+    .mobile-nav-toggle {
+        display: none !important; /* Hide toggle button on desktop */
+    }
+}
+/* Mobile Sidebar Styles */
+.mobile-sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: #2A3F54;
+    transition: all 0.3s ease;
+    z-index: 10000;
+    overflow-y: auto;
+}
+
+.mobile-sidebar.active {
+    left: 0;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+}
+
+.mobile-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: none;
+}
+
+.mobile-sidebar-toggle {
+    position: fixed;
+    left: 20px;
+    top: 10px;
+    z-index: 10001;
+    background: #2A3F54;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-sidebar-toggle {
+        display: block;
+    }
+
+    .mobile-sidebar-overlay.active {
+        display: block;
+    }
+
+    body.sidebar-open {
+        overflow: hidden;
+    }
+}
+
+        /* Ensure content doesn't shift when scrollbar appears */
+.menu_section {
+    margin-right: 4px;
+}
+.loader {
+   
+  width: 120px;
+  height: 20px;
+  -webkit-mask: radial-gradient(circle closest-side,#000 94%,#0000) left/20% 100%;
+  background: linear-gradient(#000 0 0) left/0% 100% no-repeat #ddd;
+  animation: l17 2s infinite steps(6);
+}
+@keyframes l17 {
+    100% {background-size:120% 100%}
+}
+
+
+
+
+.loader2 {
+  --d:22px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  color: #25b09b;
+  box-shadow:
+    calc(1*var(--d))      calc(0*var(--d))     0 0,
+    calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+    calc(0*var(--d))      calc(1*var(--d))     0 2px,
+    calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+    calc(-1*var(--d))     calc(0*var(--d))     0 4px,
+    calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+    calc(0*var(--d))      calc(-1*var(--d))    0 6px;
+  animation: l27 1s infinite steps(8);
+}
+@keyframes l27 {
+  100% {transform: rotate(1turn)}
+}
+/* Rich Editor Styles */
+.rich-editor-container {
+    border: 1px solid #e1dfdd;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.editor-toolbar {
+    padding: 8px;
+    border-bottom: 1px solid #e1dfdd;
+    background: #f3f2f1;
+    display: flex;
+    gap: 8px;
+}
+
+.editor-input-container {
+    display: flex;
+    align-items: flex-end;
+    padding: 8px;
+}
+
+.editor-input, .observation-editor-input, .insight-editor-input {
+    flex: 1;
+    min-height: 40px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.editor-input:empty:before, .observation-editor-input:empty:before, .insight-editor-input:empty:before {
+    content: attr(placeholder);
+    color: #8a8886;
+    pointer-events: none;
+}
+
+.editor-send-btn, .observation-editor-send-btn, .insight-editor-send-btn, .editor-toolbar-toggle {
+    background: none;
+    border: none;
+    color: #0078d4;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.editor-send-btn:hover, .editor-toolbar-toggle:hover, observation-editor-send-btn:hover , insight-editor-send-btn:hover {
+    background: #f3f2f1;
+    border-radius: 4px;
+}
+
+.dynamicList, .observations-dynamicList, .insights-dynamicList {
+    list-style: none;
+    padding: 0;
+    margin-top: 16px;
+}
+
+.dynamicList li, .observations-dynamicList li , .insights-dynamicList li {
+    background: #f3f2f1;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.dynamicList li button.removenotes, .observations-dynamicList li button.removeobservations, .insights-dynamicList li button.removeinsights {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #a19f9d;
+}
+
+.dynamicList li button.removenotes:hover, .observations-dynamicList li button.removeobservations:hover,
+ .insights-dynamicList li button.removeinsights:hover {
+    color: #d13438;
+}
+    </style>
+  </head>
+
+  <body class="nav-md">
+
+    <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+        <i class="fa fa-bars"></i>
+    </button>
+    <div class="mobile-sidebar-overlay"></div>
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="navbar nav_title" style="border: 0;">
+            <a href="#" class="site_title"><span></span></a>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <!-- menu profile quick info -->
+          <div class="profile clearfix">
+            
+          </div>
+        <div class="menu_section">
+            <!-- <h3>General</h3> -->
+            <ul class="nav side-menu">
+               <li><a href="/Dashboard">Dashboard</a></li>
+              
+            </ul>
+            <ul class="nav side-menu">
+                <li>
+                    <a href="#"><i class="fa fa-folder"></i> Projects <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" id="project-list-mobile">
+
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav side-menu">
+              <li><a><i class="fa fa-home"></i> Feeds <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                
+                  <li><a href="/News">News Feeds</a></li>
+                  <li><a href="/SocialMedia">Social Feeds</a></li>
+                </ul>
+              </li>
+            </ul>
+
+            <button class="create-project-btn btn btn-primary" onclick="showCreateProjectPopup()">+ Create Project</button>
+          </div>
+    </div>
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+                <div class="profile_pic" style="padding-top: 20px;">
+                  <img src="./static/images/user.png" alt="..." class="img-circle profile_img">
+                </div>
+                <div class="profile_info">
+                  <span>Welcome</span>
+                  <h2>{{username}}</h2>
+                  <ul class="list-unstyled user_data" style="color: white;">
+                         <li>
+                            <i class="fa fa-briefcase user-profile-icon"></i>  {{designation}}
+                          </li>
+                          <li>
+                            <i class="fa fa-building user-profile-icon"></i>  {{company}}
+                          </li>
+                  </ul>
+  
+                </div>
+              </div>
+              <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <!-- <h3>General</h3> -->
+                <ul class="nav side-menu">
+                  <li><a href="/Dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
+                </ul>
+                <ul class="nav side-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-folder"></i> Projects <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" id="project-list">
+                            
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Feeds <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    
+                      <li><a href="/News">News Feeds</a></li>
+                      <li><a href="/SocialMedia">Social Feeds</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul class="nav side-menu" style="display: none;" id="user-registration">
+                    <li><a href="/register"><i class="fa fa-user"></i> Register User</a></li>
+                </ul>
+                <ul class="nav side-menu" id="qc-done" style="display: none;">
+                    <li><a href="/News?qc_done=all"><i class="fa fa-user"></i>All QC Feeds</a></li>
+                </ul>
+                <ul class="nav side-menu" id="my-qc-done">
+                    <li><a href="/News?qc_done={{username}}"><i class="fa fa-user"></i> My QC Feeds</a></li>
+                </ul>
+                <ul class="nav side-menu" id="punlished-articles">
+                    <li><a href="/News?qc_done=published"><i class="bi bi-send-check-fill"></i> Published Feeds</a></li>
+                </ul>
+                <ul class="nav side-menu">
+                    <li><a href="/reports"><i class="fa fa-file"></i></i> Reports</a></li>
+                </ul>
+
+                <button id="create-project-btn" class="btn btn-primary" onclick="showCreateProjectPopup()">+ Create Project</button>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small" style="display: none;">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <div class="nav toggle">
+                  <img src="..\static\images\Foresight logo.jpg" style="width: 75px; height: auto; display: block; margin: 0 auto;">
+                </div>
+                
+                <nav class="nav navbar-nav">
+                <ul class=" navbar-right">
+                  
+                  <li class="nav-item dropdown open" style="padding-left: 15px;">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                      <img src="./static/images/user.png" alt="">{{username}}
+                    </a>
+                    <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                      <!-- <a class="dropdown-item"  href="javascript:;"> Profile</a>
+                        <a class="dropdown-item"  href="javascript:;">
+                          <span class="badge bg-red pull-right">50%</span>
+                          <span>Settings</span>
+                        </a> -->
+                    <!-- <a class="dropdown-item"  href="javascript:;">Help</a> -->
+                      <a class="dropdown-item"  href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    </div>
+                  </li>
+  
+            
+                </ul>
+              </nav>
+            </div>
+          </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+
+            <div class="page-title">
+              
+              <div class="col-md-8 col-sm-8">
+                <div class="form-group top_search">
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="search" placeholder="Search for...">
+                      <span class="input-group-btn">
+                          <button class="btn btn-secondary" id="search-btn" onclick="applySearch()" type="button" style="background-color: #2A3F54;color: #fff;">Go!</button>
+                      </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-8" style="display: flex;margin-bottom: 10px; height: 40px;">
+                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 60%;margin-bottom: 5px;">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span></span> <i class="fa fa-caret-down"></i>
+                </div>
+<!--                <button id="download-pdf-btn" class="btn btn-primary" style="margin-left: 10px; font-size: smaller;"> &lt;!&ndash;onclick="createpdf()"&ndash;&gt;-->
+<!--                    <i class="fa fa-download"></i> Generate PDF-->
+<!--                </button>-->
+<!--                <button id="download-doc-btn" class="btn btn-primary">-->
+<!--                   <i class="fa fa-file-word"></i> Generate DOC-->
+<!--                </button>-->
+
+                  <div class="dropdown" style="display: inline-block; margin-left: 10px;">
+                      <button class="btn btn-primary dropdown-toggle" type="button" id="downloadDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: smaller;">
+                         Generate Report
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="downloadDropdown">
+                         <button id="download-pdf-btn" class="btn btn-primary" style="margin-left: 10px; font-size: smaller;"> <!--onclick="createpdf()"-->
+                            <i class="fa fa-download"></i> Generate PDF
+                        </button>
+                        <button id="download-doc-btn" class="btn btn-primary" style="margin-left: 10px; font-size: smaller;">
+                           <i class="fa fa-file-word"></i> Generate DOC
+                        </button>
+                      </div>
+                    </div>
+
+                <!-- <button id="download-pdf-btndownload-pdf-btn" class="btn btn-primary" style="margin-left: 10px; font-size: smaller;">
+                    <i class="fa fa-download"></i> Generate PDF
+                </button> -->
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div id="selected-filters-container"></div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    
+                    <h2 id="all-count" onclick="setLevel(0)">Loading News...</h2>
+                    
+                    
+                    <h2 id="project-name" style="padding-top: 3px;"></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                     
+                      <li id="pro-count" style="display: none;">
+                        <div class="dropdown">
+                          <button class="dropdown-btn news-count" style="margin-bottom: 0px;margin-right: 0px;padding-bottom: 2px; padding-right: 5px;">News</button><i class="bi bi-caret-down-fill"></i>
+                          <div class="dropdown-content">
+                            <button class="btn btn-primary news-count" style="color: black; background-color: white;">Loading News...</button>
+                            <button class="btn btn-success social-count"  style="color: black; background-color: white;">Social (0)</button>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown">
+                          <button class="dropdown-btn" style="margin-bottom: 0px;margin-right: 0px;padding-bottom: 2px;">ADD<i class="bi bi-caret-down-fill"></i></button>
+                          <div class="dropdown-content">
+                            <button id="addcard" class="btn btn-primary" onclick="window.location.href='/addcard'">News Article</button>
+                            <!-- <button id="add-article-request-btn" class="btn btn-primary">Article Request</button> -->
+                            <button id="add-to-projects-btn" class="btn btn-primary" onclick="showPopup()">Project</button>
+                          </div>
+                        </div>
+                      </li>
+                      
+                      <li>
+                        <div class="dropdown">
+                          <div class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Country</span></div>
+                          <div id="countries-filters" class="dropdown-menu" aria-labelledby="dropdownMenuButton1" x-placement="bottom-start"></div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown">
+                          <div class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Sector</span></div>
+                          <div id="sectors-filters" class="dropdown-menu" aria-labelledby="dropdownMenuButton2" x-placement="bottom-start"></div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown">
+                          <div class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Publication</span></div>
+                          
+                          <div id="publisians-filters" class="dropdown-menu" aria-labelledby="dropdownMenuButton3" x-placement="bottom-start">
+                            <input type="text" id="filterSearch" onkeyup="filterCheckboxes()" placeholder="Search..." 
+                            style="width: 100%; padding: 5px; margin-bottom: 10px;">
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown">
+                          <div class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Tags</span></div>
+                          
+                          <div id="filter_tags-filters" class="dropdown-menu" aria-labelledby="dropdownMenuButton4" x-placement="bottom-start">
+                            <input type="text" id="filter_tags-filterSearch" onkeyup="filterCheckboxes()" placeholder="Search..." 
+                            style="width: 100%; padding: 5px; margin-bottom: 10px;">
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown">
+                          <button class="dropdown-btn" style="margin-bottom: 0px;margin-right: 0px;padding-bottom: 2px;"><span id="selected-count" style="margin-left: 10px; font-weight: bold;">Selected:0<i class="bi bi-caret-down-fill"></i></span></button>
+                          <div class="dropdown-content">
+                            <button id="select-all-btn" class="btn btn-primary" style="margin-bottom: 0px;border-bottom-width: 1px; padding-bottom: 0px;">Select All</button>
+                          </div>
+                        </div>
+                        
+                      </li>
+                      
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="popup-overlay" id="popupOverlay"></div>
+                        <div class="popup" id="popup">
+                            <select id="projectDropdown">
+
+                            </select>
+                            <br>
+                            <button id="addtoproject">Add</button>
+                            <button class="create-project-btn" onclick="showCreateProjectPopup()">Create Project</button>
+                            <button onclick="closePopup()">Close</button>
+                        </div>
+                        <div class="popup" id="add-image">
+                            <h1>Upload an Image</h1>
+                            <div id="uploadContainer" enctype="multipart/form-data" style="align-items: center">
+                                <label for="imageInput">Select Image:</label>
+                                <input type="file" name="image" id="imageInput">
+                                <br>
+                                <label for="imageDescriptionInput">Image Description:</label>
+                                <input type="text" name="image_description" id="imageDescriptionInput" placeholder="Enter image description">
+                                <input type="hidden" name="card_id" id="card_id_input">
+                                <input type="hidden" name="project_id" id="project_id_input">
+                                <input type="hidden" name="page" id="page_input">
+                                <br>
+                                <button id="uploadButton">Upload</button>
+                                <button class="close-popup-btn" onclick="closePopup()">Close</button>
+                            </div>
+                               
+
+                        </div>
+                        <div class="popup" id="popup-create-project">
+                            <button class="close-btn" onclick="closePopup()" style="color: #000; background-color: white;">✖</button>
+                            <div class="popup-header" style="background-color: white; display: ruby-text;">
+                                <h2 style="color: #000;">Create Project</h2>
+                                
+                            </div>
+                            <input type="text" style="width: 100%; border: 1px solid black; height: calc(1.5em + .75rem + 2px);" id="project-name-input" placeholder="Enter project name">
+                            <div class="error-message" id="error-message"></div>
+                            <div style="display: flex; margin-top: 10px;">
+                                <button id="create-project">Create</button>
+                                
+                                <button class="close-popup-btn" onclick="closePopup()">Close</button>
+                            </div>
+                            
+                        </div>
+
+                        <div class="popup" id="project-create-success" style="text-align: center;">
+                            
+                            <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" class="bi bi-check-circle" viewBox="0 0 16 16">
+                                    <path fill="green" d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708"/>
+                                </svg>
+                            </div>
+                            
+                            <p style="margin: 10px 0;">Project created successfully!</p>
+                            <button class="close-popup-btn" onclick="closePopup()" style="margin: 5px 0;">Close</button>
+                           
+                        </div>
+                        <div class="popup" id="project-deleted-success" style="text-align: center;">
+                            <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                    <path fill="red" d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"></path>
+                                </svg>
+                            </div>
+                            <p style="margin: 10px 0;">Project deleted successfully!</p>
+                            <button class="close-popup-btn" onclick="closePopup()" style="margin-top: 5px;">Close</button>
+                        </div>
+                        
+
+                        <div class="chatbot-popup" id="popup-recordings" style="display: none;">
+                            <div class="popup-header">
+                                <span>Recordings</span>
+                                <button class="close-btn">✖</button>
+                            </div>
+
+                            <div id="recordingsList"></div>
+                            <div class="popup-footer">
+                                <input type="text" id="record-title" placeholder="Enter title">
+                                <button id="recordButton">🎙️ Record</button>
+                                <button id="stopButton" disabled>⏹️ Stop</button>
+                            </div>
+                        </div>
+                    <!-- Image Modal -->
+                    <div id="imageModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center;">
+                        <span id="closeModal" style="position:absolute;top:20px;right:30px;color:white;font-size:40px;cursor:pointer;">&times;</span>
+                        <img id="modalImage" src="" style="max-width:90%; max-height:90%;">
+                    </div>
+                    <!-- Delete Confirmation Popup -->
+                    <div class="popup" id="popup-delete-project" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background-color: white; padding: 20px; border: 1px solid black; z-index: 1000;">
+                        <button class="close-btn" onclick="closeDeletePopup()" style="color: #000; background-color: white; border: none; float: right;">✖</button>
+
+                        <div class="popup-header" style="background-color: white; display: ruby-text;">
+                            <h2 style="color: #000;">Confirm Delete</h2>
+                        </div>
+
+                        <p id="delete-popup-message" style="margin: 15px 0;">Are you sure you want to delete this project?</p>
+
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                            <button id="confirm-delete-btn" style="background-color: red; color: white;">Delete</button>
+                            <button class="close-popup-btn" onclick="closeDeletePopup()">Cancel</button>
+                        </div>
+                    </div>
+                    <!-- Alert Modal -->
+                    <div class="modal fade" id="alertModal" tabindex="-1"  aria-hidden="true" style="display: none; z-index: 1060;">
+                        <div class="modal-dialog" style="max-width: 400px;">
+                        <div class="modal-content" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                            <div class="modal-header" style=" border-bottom: 1px solid #dee2e6;">
+                            <h5 class="modal-title" style="margin: 0;">Alert</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
+                                    style="background: none; border: none;"></button>
+                            </div>
+                            <div class="modal-body" id="alertModalMessage" style="font-size: 14px; color: #333;"></div>
+                            <div class="modal-footer" style="border-top: 1px solid #dee2e6;">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" 
+                                    style="padding: 4px 12px; font-size: 14px; border-radius: 4px;">OK</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+<!--                    // Download Documents-->
+
+
+
+                  <div class="popup" id="download_loder" style="text-align: center;">
+
+                        <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+                            <div class="loader2"></div>
+                        </div>
+
+                        <p style="margin: 10px 0;">Generating..</p>
+                    </div>
+                    <div class="popup" id="fetch-loader" style="text-align: center;">
+
+                        <div class="popup-header" style="background-color: white; display: flex; justify-content: center;">
+                            <div class="loader2"></div>
+                        </div>
+
+                        <p style="margin: 10px 0;">Loading...</p>
+
+                    </div>
+
+                    <!-- <div class="modal fade bs-example-modal-sm show" id="alertModal" tabindex="-1" role="dialog" aria-hidden="true" aria-modal="true" style="display: none; padding-right: 15px;">
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+    
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="myModalLabel2">Modal title</h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              
+                              <p id="alertModalMessage"></p>
+                              
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+    
+                          </div>
+                        </div>
+                      </div> -->
+
+                    <div class="row" id="news-container">
+                        <!-- <div class="col-md-12" style="display: flex; justify-content: center; align-items: center; height: 50vh;">
+                            <div class="loader"></div>
+                        </div> -->
+
+
+                        
+                       
+                        
+
+                      <!--cards display here-->
+                    
+                    </div>
+                    <br>
+                    <center><button id="load-more-btn" onclick="loadMoreNews()" style="display: none;">Load More</button></center>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            2025 <a href="https://reinlabs.co.in/">ReinLabs</a> All rights reserved.
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- compose -->
+    <div class="compose col-md-6  ">
+      <div class="compose-header">
+        New Message
+        <button type="button" class="close compose-close">
+          <span>×</span>
+        </button>
+      </div>
+
+      <div class="compose-body">
+        <div id="alerts"></div>
+
+        <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor">
+          <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font"></i><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            </ul>
+          </div>
+
+          <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li>
+                <a data-edit="fontSize 5">
+                  <p style="font-size:17px">Huge</p>
+                </a>
+              </li>
+              <li>
+                <a data-edit="fontSize 3">
+                  <p style="font-size:14px">Normal</p>
+                </a>
+              </li>
+              <li>
+                <a data-edit="fontSize 1">
+                  <p style="font-size:11px">Small</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="btn-group">
+            <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+            <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+            <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+            <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+          </div>
+
+          <div class="btn-group">
+            <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
+            <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
+            <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
+            <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+          </div>
+
+          <div class="btn-group">
+            <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+            <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+            <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+            <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+          </div>
+
+          <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
+            <div class="dropdown-menu input-append">
+              <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+              <button class="btn" type="button">Add</button>
+            </div>
+            <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+          </div>
+
+          <div class="btn-group">
+            <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
+            <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+          </div>
+
+          <div class="btn-group">
+            <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+            <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+          </div>
+        </div>
+
+        <div id="editor" class="editor-wrapper"></div>
+      </div>
+
+      <div class="compose-footer">
+        <button id="send" class="btn btn-sm btn-success" type="button">Send</button>
+      </div>
+    </div>
+    <!-- /compose -->
+
+    <!-- jQuery -->
+    <script src="./static/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="./static/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="./static/js/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="./static/js/nprogress.js"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="./static/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="./static/js/jquery.hotkeys.js"></script>
+    <script src="./static/js/prettify.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+        <!-- Custom Theme Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+
+    
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./static/js/uploadimages.js"></script>
+    <!-- Optional: Lazy Loading Support for Older Browsers -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        if ('loading' in HTMLImageElement.prototype === false) {
+        images.forEach(img => {
+            const src = img.getAttribute('src');
+            img.removeAttribute('loading');
+            img.setAttribute('src', src);
+        });
+        }
+    });
+    </script>
+    <!--get news data-->
+    <script>
+        // ✅ Fetch News Function
+        async function fetchNews(reset = true) {
+            document.getElementById("fetch-loader").style.display = "flex";
+            const searchQuery = document.getElementById('search').value.trim();
+            const selectedDateRange = document.getElementById('reportrange').value;
+            
+
+            let dateParams = {};
+            if (selectedDateRange) {
+                const dates = selectedDateRange.split(' to ').map(date => date.trim());
+                if (dates.length === 1) {
+                    dateParams = { start_date: dates[0], end_date: dates[0] };
+                } else if (dates.length === 2) {
+                    dateParams = { start_date: dates[0], end_date: dates[1] };
+                }
+            }
+
+            const queryParams = Object.entries(selectedFilters)
+                .filter(([key, values]) => values.length > 0)
+                .map(([key, values]) => `${key}=${values.join(',')}`)
+                .join('&');
+
+            const additionalParams = [];
+            if (searchQuery) {
+                additionalParams.push(`search=${encodeURIComponent(searchQuery)}`);
+            }
+            if (dateParams.start_date && dateParams.end_date) {
+                additionalParams.push(`start_date=${dateParams.start_date}`);
+                additionalParams.push(`end_date=${dateParams.end_date}`);
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const level = urlParams.get('level');
+            const project_id = urlParams.get('project_id');
+            const qcdone = urlParams.get('qc_done');
+            
+
+            let queryString = `?${[queryParams, ...additionalParams].filter(Boolean).join('&')}&skip=${skip}&limit=${limit}`;
+            if (level === '1') {
+                queryString += `&level=${level}`;
+            }
+            if (qcdone){
+                queryString += `&qc_done=${qcdone}`
+                
+            }
+            if (project_id) {
+                queryString += `&project_id=${project_id}`;
+                const projectresponse = await fetch(`/api/projects/${project_id}`);
+                const data = await projectresponse.json();
+                document.getElementById('all-count').style.display = 'none';
+                document.getElementById('pro-count').style.display = 'inline-block';
+                // document.getElementById('news-count').style.display = 'inline-block';
+                // document.getElementById('social-count').style.display = 'inline-block';
+                document.querySelectorAll('.news-count').forEach(el => {
+                        el.innerText = `News (${data.news.length})`;
+                        });
+                document.querySelector('.social-count').innerText = `Socialmedia (${data.social.length})`;
+                const removeBtns = document.getElementsByClassName('remove-from-project-btn');
+                    for (let i = 0; i < removeBtns.length; i++) {
+                        removeBtns[i].style.display = 'inline-block';
+                    }
+                
+                document.querySelector('.news-count').onclick = function() {
+                    loadprojectNews(project_id)
+                    
+                };
+                document.querySelector('.social-count').onclick = function() {
+                    loadprojectSocial(project_id)
+                    
+                };
+
+            }
+            const [responseTags, response, filtersResponse, analytics] = await Promise.all([
+                fetch('/api/tags'),
+                fetch(`/api/news${queryString}`),
+                fetch(`/api/filters${queryString+ '&type=news'}`),
+                fetch('/api/analytics')
+            ]);
+            
+            const tagList = await responseTags.json();
+            const { data: newsData, all_count, qccounts, project_name, filters_count, username: user } = await response.json();
+            const filtersData = await filtersResponse.json();
+            if (!analytics.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const analytics_data = await analytics.json();
+
+            
+            document.getElementById('all-count').innerText = `News(${all_count})`;
+            document.getElementById('my-qc-done').innerHTML = `<li><a href="/News?qc_done={{username}}"><i class="bi bi-send-arrow-down-fill"></i> My QC Feeds (${qccounts.myqc_done_count})</a></li>`;
+            document.getElementById('qc-done').innerHTML = `<li><a href="/News?qc_done=all"><i class="bi bi-send-arrow-down-fill"></i> All QC Feeds (${qccounts.allqc_count})</a></li>`;
+            document.getElementById('punlished-articles').innerHTML = `<li><a href="/News?qc_done=published"> <i class="bi bi-send-check-fill"></i> Published Feeds (${qccounts.published_count})</a></li>`;
+            if (qcdone){
+                document.getElementById('all-count').style.display = 'none';
+                document.getElementById('pro-count').style.display = 'inline-block';
+                // document.getElementById('qc-done-count').style.display = 'none';
+                // document.getElementById('news-count').style.display = 'inline-block';
+                // document.getElementById('social-count').style.display = 'inline-block';
+                document.querySelectorAll('.news-count').forEach(el => {
+                        el.innerText = `News (${qccounts.qcnewscount})`;
+                        });
+                document.querySelector('.social-count').innerText = `Socialmedia (${qccounts.qcsocialcount})`;
+                
+
+                document.querySelector('.news-count').onclick = function(){
+                    window.location.href = `/News?qc_done=${qcdone}`;
+                
+                    
+                };
+                document.querySelector('.social-count').onclick = function() {
+                    window.location.href = `/SocialMedia?qc_done=${qcdone}`;
+                    
+                };
+            }
+
+
+            if (project_id) {
+                document.getElementById('project-name').innerText = `${project_name}`;
+                document.getElementById('project-name').setAttribute('data-id', project_id);
+            }
+            
+
+            
+
+            // Store the fetched filters
+            countrys = filtersData.country;
+            sectors = filtersData.sector;
+            publisians = filtersData.publisian;
+            filter_tags = filtersData.filter_tags;
+
+            // Update filters using data from `/api/filters`
+            updateFilters('countries', filtersData.country);
+            updateFilters('sectors', filtersData.sector);
+            updateFilters('publisians', filtersData.publisian);
+            updateFilters('filter_tags', filtersData.filter_tags);
+
+            
+            
+            
+            displayNews(newsData,tagList, user,project_id,qcdone,analytics_data, reset);
+        }
+    </script>
+    <script>
+        // Trigger search when the button is clicked
+        function applySearch() {
+            
+            skip = 0; // Reset pagination
+            fetchNews(true);
+            
+        }
+    </script>
+    <!--display news data-->
+    <script>
+        //Display news data
+        function displayNews(news,tagList,user,project_id,qcdone,analytics_data, reset){
+            
+            const newsContainer = document.getElementById('news-container');
+
+            if (reset) newsContainer.innerHTML = ``;
+            const count = news.length;
+            if (count === 0 && project_id) {
+                newsContainer.innerHTML = `<div class="col-md-12"><h2 style="text-align: center;">To populate your project with data, please visit the News or Social Feed section and add the relevant feeds. Once added, the selected content will be displayed within your project.</h2></div>
+                <div class="col-md-12" style="text-align: center;">
+                    <button class="btn btn-primary" style="margin-left: 10px; font-size: smaller;" onclick="window.location.href='/News'">
+                        <i class="fa fa-arrow-left"></i> Go to News Feeds
+                    </button>
+                    <button class="btn btn-primary" style="margin-left: 10px; font-size: smaller;" onclick="window.location.href='/SocialMedia'">
+                        <i class="fa fa-arrow-left"></i> Go to SocialMedia Feeds
+                    </button>
+                </div>`;               ;
+                return;
+            }else if (count > 19){
+                document.getElementById('load-more-btn').style.display = 'block';
+            }else if (count <= 19){
+                document.getElementById('load-more-btn').style.display = 'none';
+            }
+            const currentUsername = "{{ username }}";
+            let currentUserlevel = "{{ level }}";
+            currentUserlevel = parseInt(currentUserlevel);
+            const company = "{{ companyid }}";
+            if (currentUserlevel >= 1){
+                document.getElementById('qc-done').style.display = 'block';
+                document.getElementById('my-qc-done').style.display = 'block';
+                document.getElementById('user-registration').style.display = 'none';
+            }
+            if (currentUserlevel >= 2){
+                document.getElementById('qc-done').style.display = 'block';
+                document.getElementById('my-qc-done').style.display = 'block';
+                document.getElementById('user-registration').style.display = 'block';
+            }
+            
+            news.forEach(item => {
+                var countryId = item.country;
+                let party_analytics = analytics_data.analytics.party;
+                let sectorId = item.sector
+                const country = countrys.find(c => c.id === countryId);
+                const sector = sectors.find(c => c.id === sectorId);
+                const id = item._id || "";
+                
+                const card = document.createElement('div');
+                card.id = id;
+                card.setAttribute("draggable", true);
+                card.setAttribute("data-id", id);
+                card.setAttribute("data-type", "news");
+                card.setAttribute("data-title", item.title);
+                card.addEventListener('dragstart', handleDragStart);
+                if (item.manual_added) {
+                    card.style.backgroundColor = "antiquewhite";
+                }
+                card.className = 'card col-sm-12 mail_view';
+                
+                const title = item.title || "No Title";
+                var publisianId = item.publisian
+                
+                const publisian = publisians.find(c => c.id === publisianId)?.name || "Unknown";
+                const publisian_url = publisians.find(c => c.id === publisianId)?.url || "#";
+                
+                const qcdoneby = item?.[company]?.QC_Done?.user || null;
+                const itemlevel = item?.[company]?.level || null;
+                
+                
+                let dbnotes = [];
+                let dbobservations = [];
+                let dbinsights = [];
+                let dbtags = [];
+                if (currentUserlevel <= 1) {
+                    const usernotes = item?.notes?.[user] || [];//get notes from db
+                    const userobservations = item?.observations?.[user] || [];//get observations from db
+                    const userinsights = item?.insights?.[user] || [];//get insights from db
+                    const usertags =  item?.tags?.[user] || [];
+                    const adminnotes = item?.notes?.['admin'] || [];
+                    const adminobservations = item?.observations?.['admin'] || [];
+                    const admininsights = item?.insights?.['admin'] || [];
+                    const admintags = item?.tags?.['admin'] || [];
+                    const AI_tags = item?.['AI_tags'] || [];
+                    dbnotes = usernotes.concat(adminnotes);//combine notes
+                    dbobservations = userobservations.concat(adminobservations);//combine observations
+                    dbinsights = userinsights.concat(admininsights);//combine insights
+                    dbtags = usertags.concat(admintags, AI_tags);//combine tags
+                }else{
+                    dbnotes = item?.notes?.[user] || [];//get notes from db
+                    dbobservations = item?.observations?.[user] || [];//get observations from db
+                    dbinsights = item?.insights?.[user] || [];//get insights from db
+                    dbtags =  item?.tags?.[user] || [];
+                    const AI_tags = item?.['AI_tags'] || [];
+                    dbtags = dbtags.concat(AI_tags);//combine tags
+                }
+                const newstagslist = item.tags || [];//get tags from db
+
+                let uploadedImages = [];
+                let validImages = [];
+                let validUploadedImages = [];
+                // Normalize original images (from `item.image`) into objects
+                const images = item.image || [];
+                const normalizedOriginalImages = images
+                .filter(image => image !== 'Not Available' && image !== 'n/a' && image.trim() !== '')
+                .map(image => ({
+                    path: image,
+                    description: '' // No description available for these
+                }));
+                let uploadedimghtml = "";
+                if (project_id) {
+                    uploadedImages = item.addedImages?.[company]?.[project_id]?.[id] || [];
+
+                    // Filter out invalid uploaded images
+                    validUploadedImages = uploadedImages.filter(img =>
+                        img?.path && img.path !== 'Not Available' && img.path !== 'n/a' && img.path.trim() !== ''
+                    );
+                    
+                    // Combine both sets
+                    validImages = normalizedOriginalImages.concat(validUploadedImages);
+                }else{
+                    validImages = normalizedOriginalImages;
+                }
+                
+                let imageHtml = "";
+                
+                validImages.forEach((img, i) => {
+                    if (i % 5 === 0) {
+                        if (i !== 0) {
+                            imageHtml += "</tr>"; // Close previous row
+                        }
+                        imageHtml += "<tr>"; // Start a new row
+                    }
+
+                    imageHtml += `
+                        <td style="text-align: center; padding: 10px;">
+                            <img src="${img.path}" alt="Full Preview" style="width:150px; height: 150px; object-fit: cover; cursor: pointer;" onclick="openImageModal('${img.path.replace(/\\/g, '\\\\')}')">
+                            ${img.description ? `<p style="margin-top: 4px; font-size: 12px;">${img.description}</p>
+                            <button class="remove-image-btn btn btn-danger" onclick="deleteImage('${img.path}', '${id}', '${project_id}', 'news')"
+                                            style="border: none; font-size: 12px; padding: 6px; line-height: 1;"><i class="fa fa-trash-o" style="margin-right: 2px;"></i> Delete</button>` : ""}
+                                            
+                        </td>
+                    `;
+                });
+
+                // Close the last row if needed
+                if (validImages.length % 5 === 0) {
+                    imageHtml += "<tr>";
+
+                }
+
+                
+                let editedContent = null;
+                let qcuser = item[company]?.QC_Done?.user || null;
+
+                if (((qcdone==="all" || qcdone==="published") && currentUserlevel >=1 && !project_id) ){
+
+                    editedContent = (item.editedContent?.[company]?.[qcuser]?.[project_id]) && item.editedContent[company][qcuser][project_id].length > 0
+                    ? item.editedContent[company][qcuser][project_id].at(-1)
+                    :(item.editedContent?.[company]?.[qcuser]?.[qcuser]) && item.editedContent[company][qcuser][qcuser].length > 0
+                    ? item.editedContent[company][qcuser][qcuser].at(-1)
+                    : null;
+
+                    }
+                    else if(qcdone === currentUsername) {
+                        editedContent=(item.editedContent?.[company]?.[currentUsername]?.[currentUsername]) && item.editedContent[company][currentUsername][currentUsername].length > 0
+                        ? item.editedContent[company][currentUsername][currentUsername].at(-1)
+                        : null;
+
+                    }
+                    else if (project_id && qcuser === currentUsername) {
+                        console.log("project_id: " + project_id + " qcuser: " + qcuser + " currentUsername: " + currentUsername);
+                        editedContent=(item.editedContent?.[company]?.[qcuser]?.[project_id]) && item.editedContent[company][qcuser][project_id].length > 0
+                        ? item.editedContent[company][qcuser][project_id].at(-1)
+                        : null;
+                    }
+
+                    else{
+                    editedContent = (item.editedContent?.[company]?.[user]?.[project_id]) && item.editedContent[company][user][project_id].length > 0
+                        ? item.editedContent[company][user][project_id].at(-1)
+                        :(item.editedContent?.[company]?.[user]?.[user]) && item.editedContent[company][user][user].length > 0
+                        ? item.editedContent[company][user][user].at(-1)
+                        : null;
+                    }
+                const contentWords = (editedContent ? editedContent.split(' ') : item.content?.split(' ')) ?? [];
+                const isContentLong = item.content?.split(' ').length > 100;
+                const shortContent = contentWords.slice(0, 100).join(' ');
+                const fullContent = editedContent || item.content || "";
+
+
+                const sanitizedContent = item.content.replace(/["'<>&]/g, ""); // Removes quotes, angle brackets, and ampersands
+
+
+                card.innerHTML = `
+                    <!-- CONTENT MAIL -->
+                      
+                        <div class="inbox-body">
+                          <div class="mail_heading row">
+                            <!--<div class="col-md-8">
+                              <div class="btn-group">
+                                <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-reply"></i> Reply</button>
+                                <button class="btn btn-sm btn-default" type="button"  data-placement="top" data-toggle="tooltip" data-original-title="Forward"><i class="fa fa-share"></i></button>
+                                <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></button>
+                                <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash"><i class="fa fa-trash-o"></i></button>
+                              </div>
+                            </div>
+                            <div class="col-md-4 text-right">
+                              <p class="date"> ${item.published_date}</p>
+                            </div>-->
+                            <div class="col-md-12">
+                              
+                              <h4>
+                                <input type="checkbox" class="post-checkbox" value="${id}" id="checkbox-${id}" style="margin-right: 8px; zoom: 1.5;">
+                                <a href=${item.news_url} target="_blank">${item.title}</a>
+                                <button class="remove-from-project-btn btn btn-danger"
+                                        data-id="${item._id}"
+                                        data-type="news"
+                                        style="font-size: 12px; padding: 6px 6px; line-height: 1; float: inline-end;">
+                                    <i class="fa fa-trash-o" style="margin-right: 2px;"></i> Delete
+                                </button>
+                                </h4>
+                                
+                            </div>
+                          </div>
+                          <div class="sender-info">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <strong>${publisian}</strong>
+                                <!--<span>(jon.doe@gmail.com)</span> to
+                                <strong>me</strong>
+                                <a class="sender-dropdown"><i class="fa fa-chevron-down"></i></a>-->
+                              </div>
+                            </div>
+                          </div>
+                          <div class="view-mail temp_view_more">
+                            <p class="news-content" contenteditable="true">${isContentLong ? shortContent : fullContent}${isContentLong ? '...' : ''}
+                            ${isContentLong ? '<button class="view-more-btn btn btn-link btn-sm" style="font-size:12px;">View More</button></p>' : ''}
+                          </div>
+                          <div class="toolbar" style="display: none;">
+                            <button class="btn highlight-btn" contenteditable="false">
+                                <i class="bi bi-highlighter"></i>
+                            </button>
+                            <div class="color-picker-container">
+                                <input type="color" class="colorPicker" value="#ffff00">
+                                <div class="color-palette">
+                                    <div class="color-box" style="background-color: #ff0000;" data-color="#ff0000"></div>
+                                    <div class="color-box" style="background-color: #00ff00;" data-color="#00ff00"></div>
+                                    <div class="color-box" style="background-color: #0000ff;" data-color="#0000ff"></div>
+                                    <div class="color-box" style="background-color: #ffff00;" data-color="#ffff00"></div>
+                                    <div class="color-box" style="background-color: #ff00ff;" data-color="#ff00ff"></div>
+                                    <div class="color-box" style="background-color: #00ffff;" data-color="#00ffff"></div>
+                                </div>
+                            </div>
+
+                            <button class="btn underline-btn" contenteditable="false">
+                                <i class="bi bi-type-underline"></i>
+                            </button>
+
+                            <button class="btn italic-btn" contenteditable="false">
+                                <i class="bi bi-type-italic"></i>
+                            </button>
+                            <button class="btn bold-btn" contenteditable="false">
+                                <i class="bi bi-type-bold"></i>
+                            </button>
+                          </div>
+
+
+                          <div style="border: 0px;">
+                              <button class="view-toolbar-btn"><i class="bi bi-brush"></i></button>
+
+                              <button class="send-btn"><i class="bi bi-floppy-fill"></i></button>
+                              
+                              <button class="add-to-project-btn" data-id="${item._id}" data-type="news"><i class="fa fa-bookmark" data-id="${item._id}" data-type="news"></i></button>
+                              <p class="qcdone-btn" style="color:green;display:none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+                                </svg>
+                                <span>QC Done By ${qcdoneby}</span>
+                              </p>
+                          </div>
+                    
+                          <table style="width: 100%; border-collapse: collapse;" class="image-preview-table">
+                                ${imageHtml}
+                                <td style="text-align: center; padding: 10px; display:none;" class="image-preview-stored" >
+                                    <button style="width: 150px; height: 150px; border: none; background: #f0f0f0; cursor: pointer;" onclick="uploadimage('${id}', 'news', ${project_id ? `'${project_id}'` : 'null'})">
+                                        <i class="fa fa-plus-square" style="font-size: 48px; color: #888;"></i>
+                                    </button>
+                                    
+                                </td>
+                            </tr>
+                                
+                          </table>
+                          <hr>
+                          <!-- /carousel images -->
+                          <div class="publish-shares">
+                            <div class="publish col-md-6">
+                                <div class="author-name">Written By: ${publisian}  <i class="bi bi-twitter-x"></i><a href="${publisian_url}" target="_blank" style="color:#0374ba;">${publisian}</a></div>
+                                <div class="publish-date">
+                                    <span>${country.name}</span>
+                                    Published Date: ${item.published_date}
+                                </div> 
+                                <div class="sector-name">
+                                    Sector: ${sector.name}
+                                </div> 
+                            </div>
+                            <div class="social col-md-6" style="display: flex; justify-content: flex-end;">
+                                <div class="share-buttons" style="display: inline-block;">
+                                    <!-- WhatsApp Share Icon -->
+                                    <button onclick="shareViaWhatsApp('${item.news_url}', '${item.title}', '${sanitizedContent.replace(/'/g, "\\'")}')" class="btn share-icon">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </button>
+                                    <!-- Facebook Share Icon -->
+                                    <button onclick="shareViaFacebook('${item.news_url}', '${item.title}', '${sanitizedContent.replace(/'/g, "\\'")}')" class="btn share-icon">
+                                        <i class="fab fa-facebook"></i>
+                                    </button>
+                                    <!-- Twitter Share Icon -->
+                                    <button onclick="shareViaTwitter('${item.news_url}', '${item.title}', '${sanitizedContent.replace(/'/g, "\\'")}')" class="btn share-icon">
+                                        <i class="fab fa-twitter"></i>
+                                    </button>
+                                    <!-- Email Share Icon -->
+                                    <button onclick="shareViaEmail('${item.news_url}', '${item.title}', '${sanitizedContent.replace(/'/g, "\\'")}')" class="btn share-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </button>
+                                    <!-- General Share Button -->
+                                    <button onclick="sharePost('${item.news_url}', '${item.title}', '${sanitizedContent.replace(/'/g, "\\'")}')" class="btn share-general">
+                                        <i class="bi bi-share-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                          </div>
+                            <div class="col-md-12">
+                                <hr>
+                                <h4>Update Party Rating</h4>
+                            </div>
+                          <div class="col-md-12 political-rating" style="display: flex; align-items: center; justify-content: space-between;">
+                                <div class="col">
+                                  <label for="rate-party">
+                                       Select Party<span style="color: red;">*</span>
+                                    </label>
+                                  <select class="form-control custom-select rate-party" name="add-rating" required>
+                                    <option value="">Select Party</option>
+                                    ${party_analytics
+                                    .filter(party => party.country === countryId)
+                                    .map(party => `<option value="${party.name}">${party.name}</option>`)
+                                    .join('')}
+                                  </select>
+                                </div>
+                                <div class="col">
+                                  <label for="party_rating">
+                                       Give Rating<span style="color: red;">*</span>
+                                  </label>
+                                  <input type="number" class="form-control party_rating" name="party_rating" min="0" max="3" value="0" required>
+                                  
+                                </div>
+                                <div class="col">
+                                  <label for="remove-rate-party">
+                                       Select Party<span style="color: red;">*</span>
+                                    </label>
+                                  <select class="form-control custom-select remove-rate-party" name="remove-rating" required>
+                                    <option value="">Select Party</option>
+                                    <option value="All" selected>All</option>
+                                    ${party_analytics
+                                    .filter(party => party.country === countryId)
+                                    .map(party => `<option value="${party.name}">${party.name}</option>`)
+                                    .join('')}
+                                  </select>
+                                </div>
+                                <div class="col">
+                                  <label for="remove-party_rating">
+                                       Remove Rating<span style="color: red;"></span>
+                                  </label>
+                                  <input type="number" class="form-control remove-party_rating" name="remove-party_rating" min="0" max="3" value="0">
+                                  
+                                </div>
+                                <div class="col d-flex">
+                                  <button type="submit" class="btn btn-success w-100" onclick="updatepartyrating('${id}', '${countryId}')"  style="margin-top: 30px;">Submit</button>
+                                </div>
+                                
+                          </div>
+
+                            <div class="col-md-12">
+                                <hr>
+                                <h4>Update Foreign Relation</h4>
+                            </div>
+                            
+
+
+                            <div class="col-md-12 foreignrelation-rating" style="display: flex; align-items: center; justify-content: space-between;">
+                                <div class="col">
+                                  <label for="country-relation">
+                                       Foreign Relation Of<span style="color: red;">*</span>
+                                    </label>
+                                  <select class="form-control custom-select country-relation" name="country-relation" required>
+                                    <option value="">Select Country</option>
+                                    ${countrys
+                                    .filter(country => country.count > 0)
+                                    .map(country => `<option value="${country.id}">${country.name}</option>`)
+                                    .join('')}
+                                  </select>
+                                </div>
+                                <div class="col">
+                                  <label for="rate-country">
+                                       Foreign Relation with Country<span style="color: red;">*</span>
+                                    </label>
+                                  <select class="form-control custom-select rate-country" name="rate-country" required>
+                                    <option value="">Select Country</option>
+                                    ${countrys
+                                    .filter(country => country.count > 0)
+                                    .map(country => `<option value="${country.id}">${country.name}</option>`)
+                                    .join('')}
+                                  </select>
+                                </div>
+                                <div class="col">
+                                  <label for="country_rating">
+                                       Give Rating(-3 to 3)<span style="color: red;">*</span>
+                                  </label>
+                                  <input type="number" class="form-control country_rating" name="country_rating" min="-3" max="3" value="0" required>
+                                  
+                                </div>
+                                <div class="col d-flex">
+                                  <button type="submit" class="btn btn-success w-100"  style="margin-top: 30px;" onclick="updateForeignRelation('${id}')">Submit</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <hr>
+                                <h4>Update Tags</h4>
+                            </div>
+
+
+
+                          <div class="selected-items col-md-12" style="display: flex; align-items: center;">    
+                              <div class="dropdown-container">
+                                  <div class="dropdown">
+                                      <input type="text" class="search-box" placeholder="Search...">
+                                      <ul class="dropdown-options">
+                                          ${tagList.map(tag => `<li data-value="${tag}" value="${tag}">${tag}</li>`).join('')}
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="notes-container col-md-12" style="display:none;">
+                            <h2>Notes</h2>
+                            <div class="rich-editor-container" style="margin-top: 10px;">
+
+                                <div class="editor-input-container">
+                                    <div class="editor-input" contenteditable="true" placeholder="Enter Notes Here"></div>
+                                    <button class="editor-send-btn"><i class="bi bi-send-fill"></i></button>
+                                </div>
+                            </div>
+                            <ul class="dynamicList"></ul>
+                          </div>
+
+                          <div class="observations-container col-md-12">
+                              <h2>Observation</h2>
+                              <div class="rich-editor-container" style="margin-top: 10px;">
+                                    <div class="editor-input-container">
+                                        <div class="observation-editor-input" contenteditable="true" placeholder="Enter Observations Here"></div>
+                                        <button class="observation-editor-send-btn"><i class="bi bi-send-fill"></i></button>
+                                    </div>
+                                </div>
+                              <ul class="observations-dynamicList">
+
+                              </ul>
+                          </div>
+                        <div class="insights-container col-md-12">
+                              <h2>Insights</h2>
+                              <div class="rich-editor-container" style="margin-top: 10px;">
+                                    <div class="editor-input-container">
+                                        <div class="insight-editor-input" contenteditable="true" placeholder="Enter Insights Here"></div>
+                                        <button class="insight-editor-send-btn"><i class="bi bi-send-fill"></i></button>
+                                    </div>
+                              </div>
+                              <ul class="insights-dynamicList">
+
+                              </ul>
+                          </div>
+
+                            <div class="recording-container col-md-12" data-id="${item._id}" data-type="news" style="display:none;">
+                                <button class="record-btn"><span class="mic-symbol">🎤</span> Recording</button>
+                                <span class="record-count">0</span>
+                            </div>
+                            <div class="col-md-12 publish-btn-div" style="display: none; justify-content: flex-end;">
+                                <button class="btn btn-primary publish-btn" style="margin-left: 10px; font-size: smaller;" onclick="publishNews('${item._id}')" id="publish-btn-${item._id}">
+                                    <i class="fa fa-arrow-right"></i> Publish
+                                </button>
+                            </div>
+                          
+
+                      
+                      <!-- /CONTENT MAIL -->
+                `;
+
+                //view more button
+                // Add event listener for "View More" button
+                if (isContentLong) {
+                    const viewMoreButton = card.querySelector('.view-more-btn');
+                    const contentElement = card.querySelector('.news-content');
+                    viewMoreButton.addEventListener('click', () => {
+                        if (viewMoreButton.innerText === 'View More') {
+
+                            contentElement.innerHTML = `${fullContent}
+                            <button class="view-more-btn btn btn-link btn-sm" style="font-size:12px;">View Less</button>`;
+
+                            
+                            const viewLessButton = contentElement.querySelector('.view-more-btn');
+
+                            viewLessButton.addEventListener('click', () => {
+
+                                contentElement.innerHTML = `${shortContent}... <button class="view-more-btn btn btn-link btn-sm" style="font-size:12px;">View More</button>`;
+                                addViewMoreEventListener(); // Reattach the event listener
+                            });
+                        }
+                    });
+
+                    function addViewMoreEventListener() {
+                        const newViewMoreButton = card.querySelector('.view-more-btn');
+                        newViewMoreButton.addEventListener('click', () => {
+
+                            contentElement.innerHTML = `${fullContent}
+                             <button class="view-more-btn btn btn-link btn-sm" style="font-size:12px;">View Less</button>`;
+                            
+                            const newViewLessButton = contentElement.querySelector('.view-more-btn');
+                            newViewLessButton.addEventListener('click', () => {
+
+                                contentElement.innerHTML = `${shortContent}... <button class="view-more-btn btn btn-link btn-sm" style="font-size:12px;">View More</button>`;
+                                addViewMoreEventListener(); // Reattach the event listener
+                            });
+                        });
+                    }
+                }
+                
+                /////////////////////////////////////////////////////////////////////////
+                //////////////////toolbar logic//////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////
+                ////colorPicker///////////////////
+                // Add event listeners to color boxes
+                card.querySelectorAll('.color-box').forEach(box => {
+                    box.addEventListener('click', function () {
+                        const selectedColor = this.getAttribute('data-color');
+                        const colorInput = card.querySelector('.colorPicker');
+                        colorInput.value = selectedColor;
+                    });
+                });
+                const viewToolbarBtn = card.querySelector('.view-toolbar-btn');
+                const toolbar = card.querySelector('.toolbar'); // Toolbar container
+                viewToolbarBtn.addEventListener('click', () => {
+                    toolbar.style.display = toolbar.style.display === 'none' ? 'flex' : 'none';
+                    //formatter logic
+                    card.querySelector(".highlight-btn").addEventListener("click", function () {
+                                formatText("highlighted", "backgroundColor", "", card);
+                            });
+
+                    card.querySelector(".underline-btn").addEventListener("click", function () {
+                        formatText("underlined", "textDecoration", "underline", card);
+                    });
+
+                    card.querySelector(".italic-btn").addEventListener("click", function () {
+                        formatText("italic", "fontStyle", "italic", card);
+                    });
+                    card.querySelector(".bold-btn").addEventListener("click", function () {
+                        formatText("bold", "fontWeight", "bold", card);
+                    });
+                    //////////////////////////////////////////////////////////////
+                });
+                newsContainer.appendChild(card);
+                const sendbuttondisplay = card.querySelector('.send-btn');
+                const qcdonebtn = card.querySelector('.qcdone-btn');
+                const toolbarBtn = card.querySelector('.view-toolbar-btn');
+                let publishButtondiv = card.querySelector('.publish-btn-div')
+                if (project_id){
+                    const imagepreview = card.querySelector('.image-preview-stored');
+                    imagepreview.style.display = 'block';
+                
+                }
+                if (!project_id){
+                    
+                    const deleteimg = card.getElementsByClassName('remove-image-btn');
+                    for (let i = 0; i < deleteimg.length; i++) {
+                        deleteimg[i].style.display = 'none';
+                    }
+                }
+                if (qcdoneby===user || qcdoneby===null){
+                    sendbuttondisplay.style.display = 'inline-block';
+                    if (qcdoneby === user){
+                        qcdonebtn.style.display = 'inline-block';
+                    }
+                }
+                else {
+                    sendbuttondisplay.style.display = 'none';
+                    qcdonebtn.style.display = 'inline-block';
+                    toolbarBtn.style.display = 'none';
+                }
+                
+                if (qcdone === 'published' || itemlevel === 2){
+                    sendbuttondisplay.style.display = 'none';
+                    qcdonebtn.style.display = 'inline-block';
+                    const publishButton = card.querySelector('.publish-btn');
+                    publishButtondiv.style.display = 'flex';
+                    publishButton.innerText = "Published";
+                    publishButton.classList.add("btn-success");
+                    publishButton.classList.remove("btn-primary");
+                    publishButton.disabled = true; // Disable the button after publishing
+                    toolbarBtn.style.display = 'none';
+                } else if (qcdone === "all"){
+                    
+                    
+                    publishButtondiv.style.display = 'flex';
+                }
+
+                // if (sectorId === "sector_2"){
+                //     card.querySelector('.political-rating').style.display = 'flex';
+                // }
+                ////////////////////////////////////////////////////////////
+                /////////////recording logic//////////////////////////////////////
+                ////////////////////////////////////////////////////////////
+                // Handle Recording Logic
+                const recordButton = card.querySelector(".record-btn");
+                recordButton.addEventListener("click", function () {
+                        let mediaRecorder;
+                        let audioChunks = [];
+                        let currentArticleId = null;
+                        let recordingsList = document.getElementById("recordingsList");
+                        recordingsList.innerHTML = "";
+                        // Ensure scrolling works inside the popup
+                        recordingsList.style.overflowY = "auto";
+                        recordingsList.style.maxHeight = "250px";
+                
+                        
+                        const article = this.closest(".recording-container");
+                        currentArticleId = article.getAttribute("data-id");
+                        
+                        console.log("Recording for article ID:", currentArticleId); // Debugging line
+                        openPopup();
+                    
+                
+
+                document.querySelector(".close-btn").addEventListener("click", closePopup);
+
+                function openPopup() {
+                    document.querySelector(".chatbot-popup").style.display = "flex";
+                    loadRecordings();
+                }
+
+                function closePopup() {
+                    document.querySelector(".chatbot-popup").style.display = "none";
+                }
+
+                function loadRecordings() {
+                    const recordings = JSON.parse(localStorage.getItem(currentArticleId) || "[]");
+                    console.log(recordings)
+                    
+                    const recordingsList = document.getElementById("recordingsList");
+                    recordingsList.innerHTML = "";
+
+                    // ✅ Select the correct recording count element
+                    const countElement = document.querySelector(`[data-id="${currentArticleId}"] .record-count`);
+                   
+                    if (countElement) {
+                        countElement.textContent = recordings.length; // ✅ Update the count
+                    }
+                    
+                    recordings.forEach((recording, index) => {
+                        displayRecording(recording, index);
+                    });
+                }
+
+                function displayRecording(recording, index) {
+                    const recordingItem = document.createElement("div");
+                    recordingItem.classList.add("recordingItem");
+
+                    const audioWrapper = document.createElement("div");
+                    audioWrapper.classList.add("audioWrapper");
+
+                    const audio = document.createElement("audio");
+                    audio.controls = true;
+                    audio.src = recording.audioUrl;
+
+                    const deleteButton = document.createElement("button");
+                    deleteButton.classList.add("deleteButton");
+                    deleteButton.innerHTML = "🗑️";
+                    deleteButton.addEventListener("click", () => deleteRecording(index));
+
+                    const title = document.createElement("p");
+                    title.textContent = recording.title;
+                    title.classList.add("recording-title");
+
+                    audioWrapper.appendChild(audio);
+                    audioWrapper.appendChild(deleteButton);
+
+                    recordingItem.appendChild(audioWrapper);
+                    recordingItem.appendChild(title); // Title now below the recording
+
+                    document.getElementById("recordingsList").appendChild(recordingItem);
+                }
+
+                function deleteRecording(index) {
+                    let recordings = JSON.parse(localStorage.getItem(currentArticleId) || "[]");
+                    recordings.splice(index, 1);
+                    localStorage.setItem(currentArticleId, JSON.stringify(recordings));
+
+                    loadRecordings(); // ✅ Update the count after deletion
+                }
+
+                document.getElementById("recordButton").addEventListener("click", startRecording);
+                document.getElementById("stopButton").addEventListener("click", stopRecording);
+
+                async function startRecording() {
+                    try {
+                        audioChunks = [];
+                        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        mediaRecorder = new MediaRecorder(stream);
+                        mediaRecorder.ondataavailable = (event) => audioChunks.push(event.data);
+
+                        mediaRecorder.onstop = saveRecording;
+                        mediaRecorder.start();
+                        document.getElementById("recordButton").disabled = true;
+                        document.getElementById("stopButton").disabled = false;
+                    } catch (error) {
+                        alertPopup("Microphone access denied. Please allow microphone access.");
+                    }
+                }
+
+                function stopRecording() {
+                    mediaRecorder.stop();
+                    document.getElementById("recordButton").disabled = false;
+                    document.getElementById("stopButton").disabled = true;
+                }
+                
+                function saveRecording() {
+                    const title = document.getElementById("record-title").value.trim();
+                    if (!title) {
+                        alertPopup("Please enter a title for the recording.");
+                        return;
+                    }
+
+                    const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+
+                    let recordings = JSON.parse(localStorage.getItem(currentArticleId) || "[]");
+                    recordings.push({ title, audioUrl });
+
+                    localStorage.setItem(currentArticleId, JSON.stringify(recordings));
+                    document.getElementById("record-title").value = ""; // Clear input
+
+                    loadRecordings(); // ✅ Update the count after adding a new recording
+                }
+            });
+            document.getElementById("fetch-loader").style.display = "none";
+        // Add event listener to the "Send" button
+                //////////////////////////////////////////////////////////////
+                //add to project button 
+               
+                card.querySelector(".add-to-project-btn").addEventListener("click",function() {
+                    const checkbox = card.querySelector(`#checkbox-${id}`);
+                    card.querySelector(`#checkbox-${id}`).checked = true;
+                    selectedPosts.push(checkbox.value);
+                    showPopup();
+                });
+                /////////////////////////////////////////////////////////////////////////
+                /////to remove card from project//////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////
+                const removeFromProjectBtn = card.querySelector('.remove-from-project-btn');
+                removeFromProjectBtn.style.display = project_id ? 'inline-block' : 'none';
+
+                //notes logic
+// Get the notes container from the card
+const notesContainer = card.querySelector('.notes-container');
+
+// Add event listeners for the rich editor
+const editorInput = notesContainer.querySelector('.editor-input');
+const editorSendBtn = notesContainer.querySelector('.editor-send-btn');
+
+// Send button logic
+editorSendBtn.addEventListener('click', async function() {
+    const inputValue = editorInput.innerHTML.trim();
+    if (inputValue !== "") {
+        const ul = notesContainer.querySelector(".dynamicList");
+        const newLi = document.createElement("li");
+        newLi.classList.add('post-notes');
+        newLi.innerHTML = `${inputValue}<button class="removenotes">❌</button>`;
+
+        const removenotes_button = newLi.querySelector('.removenotes');
+        removenotes_button.addEventListener('click', async () => {
+            const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this note?");
+            if (!confirmDelete) return;
+            newLi.remove();
+
+            const dataToRemove = {
+                _id: id,
+                notes: inputValue,
+                page: 'news'
+            };
+
+            try {
+                const response = await fetch('/api/removenotes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataToRemove),
+                });
+
+                if (!response.ok) {
+                    console.error('Failed to remove note.');
+                    alertPopup('Failed to remove note.');
+                }
+            } catch (error) {
+                console.error('Error removing note:', error);
+                alertPopup('An error occurred while removing the note.');
+            }
+        });
+
+        ul.appendChild(newLi);
+        const dataToSave = {
+            _id: id,
+            notes: inputValue,
+            page: 'news'
+        };
+
+        try {
+            const response = await fetch('/api/savenotes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dataToSave),
+            });
+
+            if (!response.ok) {
+                console.error('Failed to save note.');
+                alertPopup('Failed to save note.');
+            }
+        } catch (error) {
+            console.error('Error saving note:', error);
+            alertPopup('An error occurred while saving the note.');
+        }
+
+        editorInput.innerHTML = ""; // Clear input field
+    }
+});
+
+// Enter key handler
+editorInput.addEventListener('keydown', function (e) {
+    if (e.key === "Enter" && !e.shiftKey) { 
+                   e.preventDefault();
+                    editorSendBtn.click();
+            }
+    else if (e.key === 'Enter'  && e.shiftKey) {
+        e.preventDefault(); // Prevent default <div> insert
+
+        const br1 = document.createElement('br');
+        const br2 = document.createElement('br');
+
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+
+        range.insertNode(br2); // Insert second <br> first
+        range.insertNode(br1); // Then the first one
+
+        // Move cursor after the second <br>
+        range.setStartAfter(br2);
+        range.setEndAfter(br2);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+});
+
+//Prevent Extra <div> on Paste
+editorInput.addEventListener('paste', function (e) {
+    e.preventDefault(); // Stop default paste
+
+    // Get plain text from clipboard
+    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+
+    // Replace newlines with <br>
+    const html = text.replace(/\n/g, '<br>');
+
+    // Insert the HTML at cursor position
+    document.execCommand('insertHTML', false, html);
+});
+
+
+
+// Add existing notes
+const selectedNotesContainer = notesContainer.querySelector('.dynamicList');
+dbnotes.forEach(dbnote => {
+    notesContainer.style.display = 'block';
+    const preloadedNote = document.createElement('li');
+    preloadedNote.classList.add('post-notes');
+    preloadedNote.innerHTML = `${dbnote} <button class="removenotes">❌</button>`;
+
+    const removenotes_button = preloadedNote.querySelector('.removenotes');
+    removenotes_button.addEventListener('click', async () => {
+        const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this note?");
+        if (!confirmDelete) return;
+        preloadedNote.remove();
+
+        const dataToRemove = {
+            _id: id,
+            notes: dbnote,
+            page: 'news'
+        };
+
+        try {
+            const response = await fetch('/api/removenotes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dataToRemove),
+            });
+
+            if (!response.ok) {
+                console.error('Failed to remove preloaded note.');
+                alertPopup('Failed to remove preloaded note.');
+            }
+        } catch (error) {
+            console.error('Error removing preloaded note:', error);
+            alertPopup('An error occurred while removing the preloaded note.');
+        }
+    });
+    selectedNotesContainer.appendChild(preloadedNote);
+});
+
+                //////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////
+
+                //observations logic
+
+
+// Get the observations container from the card
+const observationsContainer = card.querySelector('.observations-container');
+
+// Add event listeners for the rich editor
+const observationEditorInput = observationsContainer.querySelector('.observation-editor-input');
+const observationEditorSendBtn = observationsContainer.querySelector('.observation-editor-send-btn');
+
+// Send button logic
+observationEditorSendBtn.addEventListener('click', async function() {
+    const observationInputValue = observationEditorInput.innerHTML.trim();
+    if (observationInputValue !== "") {
+        const ul = observationsContainer.querySelector(".observations-dynamicList");
+        const newLi = document.createElement("li");
+        newLi.classList.add('post-observations');
+        newLi.innerHTML = `${observationInputValue}<button class="removeobservations">❌</button>`;
+
+        const removeobservations_button = newLi.querySelector('.removeobservations');
+        removeobservations_button.addEventListener('click', async () => {
+            const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this Observation?");
+            if (!confirmDelete) return;
+            newLi.remove();
+
+            const observationsDataToRemove = {
+                _id: id,
+                observations: observationInputValue,
+                page: 'news'
+            };
+
+            try {
+                const response = await fetch('/api/removeobservations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(observationsDataToRemove),
+                });
+
+                if (!response.ok) {
+                    console.error('Failed to remove observation.');
+                    alertPopup('Failed to remove observation.');
+                }
+            } catch (error) {
+                console.error('Error removing observation:', error);
+                alertPopup('An error occurred while removing the observation.');
+            }
+        });
+
+        ul.appendChild(newLi);
+        const observationsDataToSave = {
+            _id: id,
+            observations: observationInputValue,
+            page: 'news'
+        };
+
+        try {
+            const response = await fetch('/api/saveobservations', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(observationsDataToSave),
+            });
+
+            if (!response.ok) {
+                console.error('Failed to save observation.');
+                alertPopup('Failed to save observation.');
+            }
+        } catch (error) {
+            console.error('Error saving observation:', error);
+            alertPopup('An error occurred while saving the observation.');
+        }
+
+        observationEditorInput.innerHTML = ""; // Clear input field
+    }
+});
+
+// Enter key handler
+observationEditorInput.addEventListener('keydown', function (e) {
+    if (e.key === "Enter" && !e.shiftKey) { 
+                   e.preventDefault();
+                    observationEditorSendBtn.click();
+            }
+    else if (e.key === 'Enter'  && e.shiftKey) {
+        e.preventDefault(); // Prevent default <div> insert
+
+        const br1 = document.createElement('br');
+        const br2 = document.createElement('br');
+
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+
+        range.insertNode(br2); // Insert second <br> first
+        range.insertNode(br1); // Then the first one
+
+        // Move cursor after the second <br>
+        range.setStartAfter(br2);
+        range.setEndAfter(br2);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+});
+
+//Prevent Extra <div> on Paste
+observationEditorInput.addEventListener('paste', function (e) {
+    e.preventDefault(); // Stop default paste
+
+    // Get plain text from clipboard
+    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+
+    // Replace newlines with <br>
+    const html = text.replace(/\n/g, '<br>');
+
+    // Insert the HTML at cursor position
+    document.execCommand('insertHTML', false, html);
+});
+
+
+// Add existing observationEditorInput
+const selectedObservationsContainer = observationsContainer.querySelector('.observations-dynamicList');
+dbobservations.forEach(dbobservation => {
+    observationsContainer.style.display = 'block';
+    const preloadedobservations = document.createElement('li');
+    preloadedobservations.classList.add('post-observations');
+    preloadedobservations.innerHTML = `${dbobservation} <button class="removeobservations">❌</button>`;
+
+    const removeobservations_button = preloadedobservations.querySelector('.removeobservations');
+    removeobservations_button.addEventListener('click', async () => {
+        const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this Observation?");
+        if (!confirmDelete) return;
+        preloadedobservations.remove();
+
+        const observationsDataToRemove = {
+            _id: id,
+            observations: dbobservation,
+            page: 'news'
+        };
+
+        try {
+            const response = await fetch('/api/removeobservations', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(observationsDataToRemove),
+            });
+
+            if (!response.ok) {
+                console.error('Failed to remove preloaded observation.');
+                alertPopup('Failed to remove preloaded observation.');
+            }
+        } catch (error) {
+            console.error('Error removing preloaded observation:', error);
+            alertPopup('An error occurred while removing the preloaded observation.');
+        }
+    });
+    selectedObservationsContainer.appendChild(preloadedobservations);
+});
+     //////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////
+
+                //insights logic
+
+
+// Get the insights container from the card
+const insightsContainer = card.querySelector('.insights-container');
+
+// Add event listeners for the rich editor
+const insightEditorInput = insightsContainer.querySelector('.insight-editor-input');
+const insightEditorSendBtn = insightsContainer.querySelector('.insight-editor-send-btn');
+
+// Send button logic
+insightEditorSendBtn.addEventListener('click', async function() {
+    const insightInputValue = insightEditorInput.innerHTML.trim();
+    if (insightInputValue !== "") {
+        const ul = insightsContainer.querySelector(".insights-dynamicList");
+        const newLi = document.createElement("li");
+        newLi.classList.add('post-insights');
+        newLi.innerHTML = `${insightInputValue}<button class="removeinsights">❌</button>`;
+
+        const removeinsights_button = newLi.querySelector('.removeinsights');
+        removeinsights_button.addEventListener('click', async () => {
+            const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this Insight?");
+            if (!confirmDelete) return;
+            newLi.remove();
+
+            const insightsDataToRemove = {
+                _id: id,
+                insights: insightInputValue,
+                page: 'news'
+            };
+
+            try {
+                const response = await fetch('/api/removeinsights', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(insightsDataToRemove),
+                });
+
+                if (!response.ok) {
+                    console.error('Failed to remove insight.');
+                    alertPopup('Failed to remove insight.');
+                }
+            } catch (error) {
+                console.error('Error removing insight:', error);
+                alertPopup('An error occurred while removing the insight.');
+            }
+        });
+
+        ul.appendChild(newLi);
+        const insightsDataToSave = {
+            _id: id,
+            insights: insightInputValue,
+            page: 'news'
+        };
+
+        try {
+            const response = await fetch('/api/saveinsights', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(insightsDataToSave),
+            });
+
+            if (!response.ok) {
+                console.error('Failed to save insight.');
+                alertPopup('Failed to save insight.');
+            }
+        } catch (error) {
+            console.error('Error saving insight:', error);
+            alertPopup('An error occurred while saving the insight.');
+        }
+
+        insightEditorInput.innerHTML = ""; // Clear input field
+    }
+});
+
+// Enter key handler
+insightEditorInput.addEventListener('keydown', function (e) {
+    if (e.key === "Enter" && !e.shiftKey) { 
+                   e.preventDefault();
+                    insightEditorSendBtn.click();
+            }
+    else if (e.key === 'Enter'  && e.shiftKey) {
+        e.preventDefault(); // Prevent default <div> insert
+
+        const br1 = document.createElement('br');
+        const br2 = document.createElement('br');
+
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+
+        range.insertNode(br2); // Insert second <br> first
+        range.insertNode(br1); // Then the first one
+
+        // Move cursor after the second <br>
+        range.setStartAfter(br2);
+        range.setEndAfter(br2);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    }
+});
+
+//Prevent Extra <div> on Paste
+insightEditorInput.addEventListener('paste', function (e) {
+    e.preventDefault(); // Stop default paste
+
+    // Get plain text from clipboard
+    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+
+    // Replace newlines with <br>
+    const html = text.replace(/\n/g, '<br>');
+
+    // Insert the HTML at cursor position
+    document.execCommand('insertHTML', false, html);
+});
+
+
+
+
+// Add existing observationEditorInput
+const selectedInsightsContainer = insightsContainer.querySelector('.insights-dynamicList');
+dbinsights.forEach(dbinsight => {
+    insightsContainer.style.display = 'block';
+    const preloadedinsights = document.createElement('li');
+    preloadedinsights.classList.add('post-insights');
+    preloadedinsights.innerHTML = `${dbinsight} <button class="removeinsights">❌</button>`;
+
+    const removeinsights_button = preloadedinsights.querySelector('.removeinsights');
+    removeinsights_button.addEventListener('click', async () => {
+        const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this Insight?");
+        if (!confirmDelete) return;
+        preloadedinsights.remove();
+
+        const insightsDataToRemove = {
+            _id: id,
+            insights: dbinsights,
+            page: 'news'
+        };
+
+        try {
+            const response = await fetch('/api/removeinsights', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(insightsDataToRemove),
+            });
+
+            if (!response.ok) {
+                console.error('Failed to remove preloaded insight.');
+                alertPopup('Failed to remove preloaded insight.');
+            }
+        } catch (error) {
+            console.error('Error removing preloaded insight:', error);
+            alertPopup('An error occurred while removing the preloaded insight.');
+        }
+    });
+    selectedInsightsContainer.appendChild(preloadedinsights);
+});
+
+                //////////////////////////////////////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////
+
+
+
+                ////////////////////////////////////////////////////////////////
+            //tags logic
+            ////////////////////////////////////////////////////////////////
+
+            const dropdown = card.querySelector('.dropdown');
+            const searchBox = card.querySelector('.search-box');
+            const dropdownOptions = card.querySelector('.dropdown-options');
+
+            searchBox.addEventListener('focus', () => {
+                dropdown.classList.add('active');
+            });
+            document.addEventListener('click', (e) => {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            const selectedItemsContainer = card.querySelector('.selected-items');
+
+            ////////changes pankaj//////////////////////////////////////////
+            searchBox.addEventListener("keydown", async function(event) {
+                        if (event.key === "Enter") {
+                            event.preventDefault();  // Prevent form submission
+                            // Create and add the dynamically selected tag
+                            const value = this.value.trim();
+                            const selected = document.createElement('span');
+                            if (user === 'admin'){
+                                selected.style.backgroundColor = 'green';
+                                selected.style.color = 'white';
+                                selected.innerText = value;
+                            }else{
+                                selected.textContent = value;
+                            }
+                            selected.addEventListener('click', async () => {
+                            const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this tag?");
+                            if (!confirmDelete) return; // User clicked "Cancel", exit the function
+                            selected.remove();
+                            
+                            const htmlValue = selected.outerHTML;
+                            // Send request to backend to remove dynamically added tag
+                            
+                            const dataToRemove = {
+                                _id: id,
+                                tags: htmlValue,
+                                page: 'news'
+                            };
+
+                            try {
+                                const response = await fetch('/api/removetag', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(dataToRemove),
+                                });
+
+                                if (response.ok) {
+                                    console.log('Dynamic tag removed successfully:', value);
+                                } else {
+                                    console.error('Failed to remove dynamic tag.');
+                                    alertPopup('Failed to remove dynamic tag.');
+                                }
+                            } catch (error) {
+                                console.error('Error removing dynamic tag:', error);
+                                alertPopup('An error occurred while removing the dynamic tag.');
+                                }
+                            });
+                            selectedItemsContainer.prepend(selected);
+                            const htmlValue = selected.outerHTML;
+                            // Send request to backend to save the dynamically added tag
+                            
+                            
+                                
+                            const dataToSave = {
+                                _id: id,
+                                tags: htmlValue,
+                                page: 'news'
+                            };
+                            
+                            try {
+                                const response = await fetch('/api/saveapi', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(dataToSave),
+                                });
+
+                                if (response.ok) {
+                                    console.log('Dynamic tag saved successfully:', value);
+                                } else {
+                                    console.error('Failed to save dynamic tag.');
+                                    alertPopup('Failed to save dynamic tag.');
+                                }
+                            } catch (error) {
+                                console.error('Error saving dynamic tag:', error);
+                                alertPopup('An error occurred while saving the dynamic tag.');
+                            }
+                        
+                            this.value = "";  // Clear input field
+                        }
+            });
+            //////////changes pankaj///////////////////////
+            // Attach click event listeners to preloaded database tags
+            dbtags.forEach(dbtag => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(dbtag, "text/html");
+                const preloadedTag = doc.body.firstChild; // Directly get the <span> element
+                
+                preloadedTag.addEventListener('click', async () => {
+                    const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this tag?");
+                    if (!confirmDelete) return; // User clicked "Cancel", exit the function
+                    preloadedTag.remove();
+                    
+                    // Send request to backend to remove the preloaded tag
+                    const dataToRemove = {
+                        _id: id,
+                        tags: dbtag,
+                        page: 'news'
+                    };
+
+                    try {
+                        const response = await fetch('/api/removetag', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(dataToRemove),
+                        });
+
+                        if (response.ok) {
+                            console.log('Preloaded tag removed successfully:', dbtag);
+                        } else {
+                            console.error('Failed to remove preloaded tag.');
+                            alertPopup('Failed to remove preloaded tag.');
+                        }
+                    } catch (error) {
+                        console.error('Error removing preloaded tag:', error);
+                        alertPopup('An error occurred while removing the preloaded tag.');
+                    }
+                });
+
+                selectedItemsContainer.prepend(preloadedTag);
+                });
+                // Logic for dynamically added tags (already in your code)
+                dropdownOptions.addEventListener('click', async (e) => {
+                    if (e.target.tagName === 'LI') {
+                        const value = e.target.getAttribute('data-value');
+
+                        // Create and add the dynamically selected tag
+                        const selected = document.createElement('span');
+                        if (user === 'admin'){
+                            selected.style.backgroundColor = 'green';
+                            selected.style.color = 'white';
+                            selected.innerText = value;
+                        }else{
+                            selected.textContent = value;
+                        }
+                        
+                        selected.addEventListener('click', async () => {
+                            const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this tag?");
+                            if (!confirmDelete) return; // User clicked "Cancel", exit the function
+                            selected.remove();
+                            // Send request to backend to remove dynamically added tag
+                            const dataToRemove = {
+                                _id: id,
+                                tags: selected.outerHTML,
+                                page: 'news'
+                            };
+
+                            try {
+                                const response = await fetch('/api/removetag', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(dataToRemove),
+                                });
+
+                                if (response.ok) {
+                                    console.log('Dynamic tag removed successfully:', value);
+                                } else {
+                                    console.error('Failed to remove dynamic tag.');
+                                    alertPopup('Failed to remove dynamic tag.');
+                                }
+                            } catch (error) {
+                                console.error('Error removing dynamic tag:', error);
+                                alertPopup('An error occurred while removing the dynamic tag.');
+                            }
+                        });
+
+                selectedItemsContainer.prepend(selected);
+                const htmlValue = selected.outerHTML;
+                
+                // Send request to backend to save the dynamically added tag
+                const dataToSave = {
+                    _id: id,
+                    tags: htmlValue,
+                    page: 'news'
+                };
+
+                try {
+                    const response = await fetch('/api/saveapi', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(dataToSave),
+                    });
+
+                    if (response.ok) {
+                        console.log('Dynamic tag saved successfully:', value);
+                    } else {
+                        console.error('Failed to save dynamic tag.');
+                        alertPopup('Failed to save dynamic tag.');
+                    }
+                } catch (error) {
+                    console.error('Error saving dynamic tag:', error);
+                    alertPopup('An error occurred while saving the dynamic tag.');
+                }
+            }
+        });
+
+        ////////search box ////////////////////////////////////////////
+        searchBox.addEventListener('input', () => {
+            const filter = searchBox.value.toLowerCase();
+            Array.from(dropdownOptions.children).forEach(option => {
+                const text = option.textContent.toLowerCase();
+                option.style.display = text.includes(filter) ? '' : 'none';
+            });
+        });
+            // Save button logic
+            const content = card.querySelector('.news-content');
+            const sendButton = card.querySelector('.send-btn');
+            sendButton.addEventListener('click', async () => {
+
+                const editedcontent = content.innerHTML.split('<button class="view-more-btn')[0]
+                // console.log(editedcontent);
+                const dataToSend = { _id: item._id,
+                                        content: editedcontent,
+                                        project_id: project_id,
+                                        page: 'news'
+                                    };
+                        
+                const response = await fetch('api/editeddata', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataToSend),
+                });
+
+                if (response.ok) {
+                    alertPopup('Edited Content saved successfully!');
+                } else {
+                    alertPopup('Failed to save data.');
+                }
+            });
+          });
+          ////////////////////////////////////////////////////////////////
+          skip += news.length; // Update skip for the next batch
+        }/////////////////////////display news data///////////////////////
+
+        // Load more news
+        function loadMoreNews() {
+            
+            fetchNews(reset = false);
+        }
+
+        // Initial Load
+        // window.onload = function() {
+            // console.log("2267 fetchnews called");
+            // fetchFilters();
+            // skip = 0;
+            // fetchNews();
+        // };
+    </script>
+    <!--filter logic-->
+    <script>
+      function updateFilterTabs() {
+          const container = document.getElementById("selected-filters-container");
+          container.innerHTML = '';
+        
+          Object.entries(selectedFilters).forEach(([key, values]) => {
+              values.forEach(value => {
+                  // Find the correct filter name based on its ID
+                  let filterName = findFilterNameById(key, value);
+                  if (!filterName) return;
+                  const filterTab = document.createElement("span");
+                  filterTab.style.borderRadius = "2px";
+                  filterTab.style.padding = "5px 10px";
+                  filterTab.style.margin = "5px";
+                  filterTab.style.backgroundColor = "#1abb9c";
+                  filterTab.style.color = "white";
+                  filterTab.classList.add("filter-tab");
+                  filterTab.innerHTML = `${filterName} <button onclick="removeFilter('${key}', '${value}')" style="padding-right:0px;">x</button>`;
+  
+                  container.appendChild(filterTab);
+              });
+          });
+      }
+  
+      function removeFilter(filterKey, id) {
+          selectedFilters[filterKey] = selectedFilters[filterKey].filter(value => value !== id);
+  
+          updateFilterTabs();  // Update filter tabs
+          fetchFilters();  // Update filter counts dynamically
+          skip = 0; // Reset pagination
+          fetchNews(true); // Fetch filtered news
+          
+      }
+  
+  
+      function findFilterNameById(filterType, id) {
+          let list = [];
+  
+          if (filterType === "country") list = countrys;
+          else if (filterType === "sector") list = sectors;
+          else if (filterType === "publisian") list = publisians;
+          else if (filterType === "site") list = sites;
+          else if (filterType === "person") list = persons;
+          else if (filterType === "filter_tag") list = filter_tags;
+  
+          const filter = list.find(item => item.id === id);
+          return filter ? filter.name : null;
+      }
+  
+    </script>
+    <script>
+        let selectedFilters = { country: [], sector: [], publisian:[], site:[], person:[], filter_tag:[]};
+        let skip = 0;
+        
+        const limit = 20;
+        var countrys;
+        var sectors;
+        var publisians;
+        var filter_tags;
+
+        function setLevel(level) {
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('level', level);
+            const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+            window.history.pushState({}, '', newUrl);
+
+            // Optionally, fetch the data again with the new level
+            skip = 0; // Reset pagination
+            fetchNews(true);
+            
+        }
+
+
+        async function fetchFilters() {
+            let queryParams = Object.entries(selectedFilters)
+                .filter(([key, values]) => values.length > 0)
+                .map(([key, values]) => `${key}=${values.join(',')}`)
+                .join('&') + '&type=news';
+
+
+            const response = await fetch(`/api/filters?${queryParams}`);
+            const data = await response.json();
+
+            // Store the fetched filters
+            countrys = data.country;
+            sectors = data.sector;
+            publisians = data.publisian;
+            filter_tags = data.filter_tags;
+            
+            updateFilters('countries', data.country);
+            updateFilters('sectors', data.sector);
+            updateFilters('publisians', data.publisian);
+            updateFilters('filter_tags', data.filter_tags);
+        }
+
+
+        async function updateFilters(filterType, data) {
+            
+            
+            const filterContainer = document.getElementById(`${filterType}-filters`);
+            if (!filterContainer) return;
+            if (filterType === "publisians"){
+                filterContainer.innerHTML = '<input type="text" id="publisians-filterSearch" onkeyup="filterCheckboxes(`publisians`)" placeholder="Search..." style="width: 100%; padding: 5px; margin-bottom: 10px;">'
+            }
+            else if (filterType === "filter_tags"){
+                filterContainer.innerHTML = '<input type="text" id="filter_tags-filterSearch" onkeyup="filterCheckboxes(`filter_tags`)" placeholder="Search..." style="width: 100%; padding: 5px; margin-bottom: 10px;">';
+            }
+            else{
+                filterContainer.innerHTML = '';
+            }
+            
+            
+            
+            data.forEach(item => {
+                if (!item.count) return;  // Skip items where count is not present or is 0
+
+
+                const filterKey = filterType === 'countries' ? 'country' :
+                                  filterType === 'sectors' ? 'sector' :
+                                  filterType === 'publisians' ? 'publisian' :
+                                  filterType === 'filter_tags' ? 'filter_tag' : '';
+
+                const isChecked = selectedFilters[filterKey]?.includes(item.id) ? 'checked' : '';
+
+                const label = document.createElement('label');
+                label.classList.add('filter-checkbox');
+
+                label.innerHTML = `
+                    <input type="checkbox" class="${filterType}-checkbox" value="${item.name}" id="${item.id}"
+                        ${isChecked} onchange="onFilterChange('${filterType}', '${item.id}')">
+                    ${item.name} (${item.count || 0})
+                `;
+
+                filterContainer.appendChild(label);
+                
+                filterContainer.appendChild(document.createElement('br'));
+            });
+            
+            
+        }
+
+
+        async function onFilterChange(filterType, id) {
+            let filterKey = filterType === 'countries' ? 'country' :
+                            filterType === 'sectors' ? 'sector' :
+                            filterType === 'publisians' ? 'publisian' :
+                            filterType === 'filter_tags' ? 'filter_tag' : '';
+
+            if (!selectedFilters[filterKey]) {
+                selectedFilters[filterKey] = [];
+            }
+
+            const index = selectedFilters[filterKey].indexOf(id);
+            if (index === -1) {
+                selectedFilters[filterKey].push(id);
+            } else {
+                selectedFilters[filterKey].splice(index, 1);
+            }
+            console.log(selectedFilters);
+            updateCheckboxSelection();
+            updateFilterTabs();  // Update filter tabs
+            
+            // fetchFilters();  // Update filters dynamically
+           
+            skip = 0; // Reset pagination
+            fetchNews(true); // Fetch filtered news
+            
+        }
+        async function filterCheckboxes(name) {
+            let input = document.getElementById(`${name}-filterSearch`).value.toLowerCase();
+            let labels = document.querySelectorAll(`#${name}-filters label`);
+
+            labels.forEach(label => {
+                let text = label.textContent.toLowerCase();
+                let br = label.nextElementSibling; // Select the <br> after the label
+                br.style.display = "none";
+
+                if (text.includes(input)) {
+                    label.style.display = "block";
+                    // if (br && br.tagName === "BR") {
+                    //     br.style.display = "none";
+                    // }
+                } else {
+                    label.style.display = "none";
+                    // if (br && br.tagName === "BR") {
+                    //     br.style.display = "none";
+                    // }
+                }
+            });
+        }
+
+        async function updateCheckboxSelection() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                const filterType = checkbox.classList.contains('countries-checkbox') ? 'country' :
+                                   checkbox.classList.contains('sectors-checkbox') ? 'sector' :
+                                   checkbox.classList.contains('publisians-checkbox') ? 'publisian' :
+                                   checkbox.classList.contains('filter_tags-checkbox') ? 'filter_tag' : '';
+
+                
+                if (filterType && selectedFilters[filterType]) {
+                    checkbox.checked = selectedFilters[filterType].includes(checkbox.id);
+                }
+                
+            });
+        }
+    </script>
+    
+
+<script>
+  // Track selected posts
+  let selectedPosts = []; // Stores selected post IDs
+  let allPostIds = []; // Stores all post IDs for the current query
+  let selectAllActive = false; // Tracks if "Select All" is currently active
+
+  // Fetch all post IDs for the current query
+  async function fetchAllPostIds(updateCount = true) {
+      const searchQuery = document.getElementById('search').value.trim();
+      const selectedDateRange = document.getElementById('reportrange').value;
+      
+
+      let dateParams = {};
+      if (selectedDateRange) {
+          const dates = selectedDateRange.split(' to ').map(date => date.trim());
+          if (dates.length === 1) {
+              dateParams = { start_date: dates[0], end_date: dates[0] };
+          } else if (dates.length === 2) {
+              dateParams = { start_date: dates[0], end_date: dates[1] };
+          }
+      }
+
+      const queryParams = Object.entries(selectedFilters)
+          .filter(([key, values]) => values.length > 0)
+          .map(([key, values]) => `${key}=${values.join(',')}`)
+          .join('&');
+
+      const additionalParams = [];
+      if (searchQuery) {
+          additionalParams.push(`search=${encodeURIComponent(searchQuery)}`);
+      }
+      if (dateParams.start_date && dateParams.end_date) {
+          additionalParams.push(`start_date=${dateParams.start_date}`);
+          additionalParams.push(`end_date=${dateParams.end_date}`);
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const level = urlParams.get('level');
+      const project_id = urlParams.get('project_id');
+      const qcdone = urlParams.get('qc_done');
+
+      let queryString = `?${[queryParams, ...additionalParams].filter(Boolean).join('&')}&skip=${skip}&limit=${limit}`;
+      if (level === '1') {
+          queryString += `&level=${level}`;
+      }
+      if (project_id) {
+          queryString += `&project_id=${project_id}`;
+      }
+        if (qcdone) {
+            queryString += `&qc_done=${qcdone}`;
+        }
+
+      try {
+          const response = await fetch(`/api/news/ids${queryString}`);
+          const result = await response.json();
+          if (result.success) {
+              allPostIds = result.post_ids;
+
+              // Update selected posts if "Select All" is active
+              if (selectAllActive) {
+                  selectedPosts = [...allPostIds];
+              }
+
+              if (updateCount) {
+                  updateSelectedCount(); // Update the count on UI
+              }
+          } else {
+              console.error("Failed to fetch post IDs:", result.message);
+          }
+      } catch (error) {
+          console.error("Error fetching post IDs:", error);
+      }
+  }
+
+  // Update the displayed count of selected posts
+  function updateSelectedCount() {
+      document.getElementById("selected-count").innerText = `Selected: ${selectedPosts.length}`;
+  }
+
+  // Handle individual checkbox selection
+  document.addEventListener("change", (event) => {
+      if (event.target.classList.contains("post-checkbox")) {
+          const postId = event.target.value;
+          if (event.target.checked) {
+              selectedPosts.push(postId);
+          } else {
+              selectedPosts = selectedPosts.filter(id => id !== postId);
+          }
+          updateSelectedCount();
+      }
+  });
+
+  // Handle "Select All" button
+  document.getElementById("select-all-btn").addEventListener("click", async () => {
+      if (selectAllActive) {
+          // Deselect all
+          selectAllActive = false;
+          selectedPosts = [];
+          document.querySelectorAll(".post-checkbox").forEach(checkbox => {
+              checkbox.checked = false;
+          });
+      } else {
+          // Select all
+          selectAllActive = true;
+          await fetchAllPostIds(); // Fetch all post IDs for the query
+          document.querySelectorAll(".post-checkbox").forEach(checkbox => {
+              checkbox.checked = true;
+          });
+      }
+      updateSelectedCount();
+  });
+
+  // Automatically select posts when new data is loaded
+  function autoSelectNewPosts() {
+      if (selectAllActive) {
+          document.querySelectorAll(".post-checkbox").forEach(checkbox => {
+              if (!selectedPosts.includes(checkbox.value)) {
+                  checkbox.checked = true;
+                  selectedPosts.push(checkbox.value);
+              }
+          });
+          updateSelectedCount();
+      }
+  }
+
+  // Handle filter/search changes
+  async function applyFilters() {
+      selectAllActive = false; // Reset "Select All" state on filter change
+      selectedPosts = []; // Clear selected posts
+      allPostIds = []; // Clear all IDs for the new query
+      updateSelectedCount();
+      await fetchAllPostIds(); // Fetch new IDs based on the filter
+      skip = 0;
+      fetchNews(true); // Fetch and display filtered news
+      
+  }
+
+  document.addEventListener('click', async function (event) {
+      if (event.target.classList.contains('remove-from-project-btn')) {
+          const postId = event.target.getAttribute('data-id');
+          const postType = event.target.getAttribute('data-type');
+          const projectName = document.getElementById('project-name').innerText;
+          const cardDiv = document.getElementById(postId)
+        //   const projectName = prompt("Enter project name to save this post:");
+          if (!projectName) return;
+          const confirmRemove = await confirmWithCustomPopup("Are you sure you want to remove this post from the project?");
+          if (!confirmRemove) return;
+          // Fetch the projects first to check if the project exists
+          const projectResponse = await fetch('/api/projects');
+          const projects = await projectResponse.json();
+          const existingProject = projects.find(p => p.name === projectName);
+          
+
+          if (!existingProject) {
+              alertPopup("Project not found. Please create it first.");
+              return;
+          }
+
+          const response = await fetch(`/api/projects/${existingProject._id}/remove`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ post_ids: [postId], post_type: postType })
+          });
+
+          const result = await response.json();
+          if (result.success) {
+              alertPopup("Post remove from project!");
+              cardDiv.remove()
+              skip = 0;
+              fetchNews()
+              
+              fetchProjects(); // Update project post count
+          } else {
+              alertPopup(result.message);
+          }
+      }
+  });
+  // Add selected posts to a project
+  function closePopup() {
+            document.getElementById("popupOverlay").style.display = "none";
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("popup-create-project").style.display = "none";
+            document.getElementById("project-create-success").style.display = "none";
+            document.getElementById("project-deleted-success").style.display = "none";
+            document.getElementById("add-image").style.display = "none";
+        }
+  function showPopup() {
+            // Show the popup and overlay
+            document.getElementById("popupOverlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
+        }
+    function showCreateProjectPopup() {
+        // Show the popup and overlay
+        document.getElementById("popupOverlay").style.display = "block";
+        document.getElementById("popup-create-project").style.display = "block";
+    }
+  document.getElementById("addtoproject").addEventListener("click", async () => {
+    //   const projectName = prompt("Enter project name to save this post:");
+          const projectName = document.getElementById("projectDropdown").value;
+          if (!projectName) return;
+
+          // Fetch the projects first to check if the project exists
+          const projectResponse = await fetch('/api/projects');
+          const projects = await projectResponse.json();
+          const existingProject = projects.find(p => p.name === projectName);
+
+          if (!existingProject) {
+              alertPopup("Project not found. Please create it first.");
+              return;
+          }
+
+      if (selectedPosts.length === 0) {
+          alertPopup("Please select posts.");
+          return;
+      }
+
+      try {
+          const response = await fetch(`/api/projects/${existingProject._id}/posts`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ post_ids: selectedPosts, post_type: "news" }),
+          });
+
+          const result = await response.json();
+          if (result.success) {
+              alertPopup("Posts added to the project successfully!");
+              document.getElementById("popupOverlay").style.display = "none";
+              document.getElementById("popup").style.display = "none";
+              fetchProjects();
+              selectedPosts = []; // Clear selected posts
+              document.querySelectorAll(".post-checkbox").forEach(checkbox => (checkbox.checked = false));
+              document.getElementById("selected-count").innerText = "Selected: 0";
+              updateSelectedCount();
+          } else {
+              alertPopup(result.message || "Failed to add posts to the project.");
+          }
+      } catch (error) {
+          console.error("Error adding posts to project:", error);
+      }
+  });
+
+
+  
+
+  async function fetchProjects() {
+      const response = await fetch('/api/projects');
+      const projects = await response.json();
+      let dropdown = document.getElementById("projectDropdown");
+      dropdown.innerHTML = `<option value="" Selected>Select a project</option>`;
+
+         
+        projects.forEach(project => {
+            let option = document.createElement("option");
+            option.value = project.name;
+            option.textContent = project.name;
+            dropdown.appendChild(option);
+        });
+        
+    const projectList = document.getElementById('project-list');
+      projectList.innerHTML = '';
+      if (projects.length === 0) {
+        projectList.innerHTML = `<p>Please Create Project</P>`
+        }
+      projects.forEach(project => {
+          const projectItem = document.createElement('li');
+          projectItem.style.display = "flex";
+          projectItem.style.justifyContent = "space-between";
+          projectItem.style.alignItems = "center";
+        //   <button class="delete-project-btn btn btn-sm btn-danger" data-id="${project._id}">✖</button>
+          projectItem.innerHTML = `
+              <a href="/projects?project_id=${project._id}" data-project-id="${project._id}" class="droppable-project">
+                  ${project.name} (${project.post_count})
+              </a>
+              
+              <button class="delete-project-btn btn btn-danger" data-id="${project._id}" style="font-size: 12px; padding: 6px 6px; line-height: 1; float: inline-end;">
+                    <i class="fa fa-trash-o delete-project-btn" data-id="${project._id}" style="margin-right: 2px;"></i>
+                </button>
+          `;
+          projectItem.setAttribute('data-project-id', project._id);
+          projectItem.addEventListener('dragover', event => event.preventDefault());
+          projectItem.addEventListener('drop', handleProjectDrop); // Use the same drop handler here
+          projectList.appendChild(projectItem);
+      });
+    //   <!--  Change  nilesh -->
+
+      const projectListMobile = document.getElementById('project-list-mobile');
+        projectListMobile.innerHTML = '';
+
+      projects.forEach(project => {
+          const projectItem = document.createElement('li');
+          projectItem.style.display = "flex";
+          projectItem.style.justifyContent = "space-between";
+          projectItem.style.alignItems = "center";
+          projectItem.innerHTML = `
+              <a href="/News?project_id=${project._id}" data-project-id="${project._id}" class="droppable-project">
+                  ${project.name} (${project.post_count})
+              </a>
+              <button class="delete-project-btn btn btn-danger"
+                                        data-id="${project._id}"
+                                        
+                                        style="font-size: 12px; padding: 6px 6px; line-height: 1; float: inline-end;">
+                                    <i class="fa fa-trash-o" style="margin-right: 2px;"></i>
+                                </button>
+          `;
+          projectItem.setAttribute('data-project-id', project._id);
+          projectItem.addEventListener('dragover', event => event.preventDefault());
+          projectItem.addEventListener('drop', handleProjectDrop); // Use the same drop handler here
+          projectListMobile.appendChild(projectItem);
+      });
+
+    //   <!--  Change-->
+  }
+
+  async function handleProjectDrop(event) {
+      event.preventDefault();
+      const postId = event.dataTransfer.getData('post_id');
+      const postType = event.dataTransfer.getData('post_type');
+      const projectId = event.target.getAttribute('data-project-id');
+
+      if (!projectId) return;
+
+      // Send request to add the post to the project
+      const response = await fetch(`/api/projects/${projectId}/posts`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ post_ids: [postId], post_type: postType })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+          alertPopup(result.message); // "Post added to project!"
+          fetchProjects(); // Update project count
+      } else {
+          alertPopup(result.message); // "Post Already in this project!"
+      }
+  }
+
+  // Reload project list on page load
+  document.addEventListener('DOMContentLoaded', fetchProjects);
+  document.querySelectorAll('#create-project').forEach(button => {
+
+        // Create a new project
+        button.addEventListener('click', async () => {
+            const projectName = document.getElementById('project-name-input').value.trim();
+            if (!projectName) {
+              const errorDiv = document.getElementById("error-message");
+              errorDiv.textContent = "Project name cannot be blank";
+              errorDiv.style.display = "block"; // make it visible
+              return;
+            }
+            if (projectName.length < 4) {
+                const errorDiv = document.getElementById("error-message");
+                errorDiv.textContent = "Project name must be at least 4 characters long";
+                errorDiv.style.display = "block"; // make it visible
+                return;
+            }
+
+            const response = await fetch('/api/projects', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: projectName })
+            });
+
+            const result = await response.json();
+            
+            if (result.success) {
+                fetchProjects(); // Refresh the project list
+                document.getElementById('project-name-input').value = ''; // Clear input field
+                closePopup(); // Close the popup
+                
+                document.getElementById('project-create-success').style.display = 'block'; // Hide the create project popup
+                new Promise(resolve => {
+                            setTimeout(() => {
+                                document.getElementById('project-create-success').style.display = 'none';
+                                resolve();
+                        }, 3000);
+                    }).then(() => {
+                        loadprojectNews(result.project_id);
+                    });
+
+            } else {
+                alertPopup(result.message);
+            }
+        });
+    });
+  
+
+    function confirmWithCustomPopup(message) {
+        return new Promise((resolve) => {
+            const popup = document.getElementById('popup-delete-project');
+            const msgElem = document.getElementById('delete-popup-message');
+            const confirmBtn = document.getElementById('confirm-delete-btn');
+
+            msgElem.textContent = message;
+
+            const onConfirm = () => {
+                cleanup();
+                resolve(true);
+            };
+
+            const onCancel = () => {
+                cleanup();
+                resolve(false);
+            };
+
+            function cleanup() {
+                confirmBtn.removeEventListener('click', onConfirm);
+                document.querySelector('#popup-delete-project .close-popup-btn').removeEventListener('click', onCancel);
+                document.querySelector('#popup-delete-project .close-btn').removeEventListener('click', onCancel);
+                popup.style.display = 'none';
+            }
+
+            confirmBtn.addEventListener('click', onConfirm);
+            document.querySelector('#popup-delete-project .close-popup-btn').addEventListener('click', onCancel);
+            document.querySelector('#popup-delete-project .close-btn').addEventListener('click', onCancel);
+
+            popup.style.display = 'block';
+        });
+    }
+
+  
+
+    async function handleProjectDelete(target) {
+        const projectId = target.getAttribute('data-id');
+       
+        // const confirmDelete = confirm("Are you sure you want to delete this project?");
+        const confirmDelete = await confirmWithCustomPopup("Are you sure you want to delete this project?");
+        if (!confirmDelete) return;
+
+        try {
+            const response = await fetch(`/api/projects/${projectId}/delete`, {
+                method: 'DELETE',
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            const result = await response.json();
+
+            
+            if (result.success) {
+                fetchProjects(); // Refresh the project list
+                document.getElementById('project-deleted-success').style.display = 'block'; // Show success message
+                // setTimeout(() => {
+                //     document.getElementById('project-deleted-success').style.display = 'none'; // Hide success message after 3 seconds
+                // }, 3000);
+            }
+        } catch (error) {
+            alertPopup("Failed to delete project: " + error.message);
+        }
+    }
+
+    // Click handler
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('delete-project-btn')) {
+            handleProjectDelete(event.target);
+        }
+    });
+
+    // Touch handler
+    document.addEventListener('touchstart', function (event) {
+        if (event.target.classList.contains('delete-project-btn')) {
+            event.preventDefault();
+            handleProjectDelete(event.target);
+        }
+    }, { passive: false });
+
+  
+
+
+
+  function loadprojectNews(projectId) {
+      window.location.href = `/projects?project_id=${projectId}`;
+  }
+
+  function loadprojectSocial(projectId) {
+      window.location.href = `/projects?project_id=${projectId}`;
+  }
+
+function formatText(className, styleProperty, value, card) {
+  const selection = window.getSelection();
+  if (!selection.rangeCount || selection.isCollapsed) return;
+
+  const range = selection.getRangeAt(0);
+  const span = document.createElement("span");
+
+  // Check if selection is already formatted
+  let parentElement = selection.anchorNode.parentElement;
+  if (parentElement && parentElement.classList.contains(className)) {
+      parentElement.classList.remove(className);
+      return;
+  }
+
+  // Apply styles
+  span.classList.add(className);
+  if (styleProperty === "backgroundColor") {
+      span.style.backgroundColor = card.querySelector(".colorPicker").value;
+  } else {
+      span.style[styleProperty] = value;
+  }
+
+  // span.appendChild(range.extractContents());
+  range.surroundContents(span);
+}
+
+
+
+
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+ 
+
+
+<script type="text/javascript">
+    $(function() {
+    
+        var start = moment('2024-12-01', 'YYYY-MM-DD');
+        var end = moment();
+        // var start = "";
+        // var end = "";
+        console.log(start);
+        function cb(start, end) {
+            var rangeText = start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD');
+            // Set the visible span text
+            $('#reportrange span').html(rangeText);
+
+            // Set the value of the #reportrange element (if it's an input or you need to track it)
+            $('#reportrange').val(rangeText); // Only works if #reportrange is an <input>
+            skip = 0;
+            fetchNews()
+            
+            
+        }
+    
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            locale: {
+                format: 'DD-MM-YYYY'
+            }
+        }, cb);
+    
+        cb(start, end);
+        // skip = 0;
+        // fetchNews()
+        // console.log("3010 fetchnews called");
+    
+    });
+</script>
+<!--share buttons-->
+<script>
+    function shareViaWhatsApp(url, title, content) {
+        const message = encodeURIComponent(`*${title}*\n\n${content}\n\nRead more here: ${url}`);
+        const whatsappUrl = `https://wa.me/?text=${message}`;
+        window.open(whatsappUrl, '_blank');
+    }
+    function shareViaFacebook(url, title, content) {
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(`${title}\n\n${content}`)}`;
+        window.open(facebookUrl, '_blank');
+    }
+    function shareViaTwitter(url, title, content) {
+        const tweet = encodeURIComponent(`${title}\n\n${content}\n\nRead more here: ${url}`);
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${tweet}`;
+        window.open(twitterUrl, '_blank');
+    }
+    // Email sharing
+    function shareViaEmail(url, title, content) {
+        const truncatedContent = content.length > 200 ? content.substring(0, 200) + '...' : content;
+        const subject = encodeURIComponent(title);
+        const body = encodeURIComponent(`Read more: ${url}`);
+ 
+        // This will open the default email client directly
+        //window.open(`mailto:?subject=${subject}&body=${body}`);
+        window.location.href = `mailto:?subject=${subject}&body=${body}`;
+ 
+    }
+    function sharePost(url, title, content) {
+        const shareText = `${title}\n\n${content}\n\nRead more here: ${url}`;
+
+        if (navigator.share) {
+            navigator
+                .share({
+                    title: title,
+                    text: shareText,
+                    url: url,
+                })
+                .then(() => console.log('Shared successfully!'))
+                .catch((error) => console.error('Error sharing:', error));
+        } else {
+            alertPopup('Web Share API not supported on this device.');
+        }
+    }
+
+
+</script>
+<script src="../static/js/script-pdf.js"></script>
+<script src="../static/js/analytics.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.side-menu > li > a').on('click', function () {
+            $(this).next('.child_menu').slideToggle();
+            $(this).find('.fa-chevron-down').toggleClass('fa-chevron-up');
+        });
+    });
+</script>
+
+<script>
+    // Handle Drag Start
+    function handleDragStart(event) {
+            console.log("Drag started:", event.target);
+            event.dataTransfer.setData('post_id', event.target.getAttribute('data-id'));
+            event.dataTransfer.setData('post_type', event.target.getAttribute('data-type'));
+ 
+            // Create a smaller drag preview
+            const postName = event.target.getAttribute('data-title') || 'Dragging...';
+ 
+ 
+            const dragImage = document.createElement('div');
+            dragImage.className = 'drag-preview';
+            dragImage.textContent = postName; // You can use an icon or other styling
+            document.body.appendChild(dragImage);
+ 
+            // Set the small preview as the drag image
+            event.dataTransfer.setDragImage(dragImage, 10, 10);
+ 
+            // Remove the preview element after the drag starts
+            setTimeout(() => document.body.removeChild(dragImage), 0);
+ 
+        }
+ 
+        // Allow Drop on Project List
+        document.addEventListener('dragover', function (event) {
+            event.preventDefault();
+        });
+</script>
+<script>
+    // Mobile Sidebar JavaScript
+ document.addEventListener('DOMContentLoaded', function() {
+     const sidebar = document.getElementById('mobileSidebar');
+     const toggleBtn = document.querySelector('.mobile-sidebar-toggle');
+     const overlay = document.querySelector('.mobile-sidebar-overlay');
+ 
+     function toggleSidebar() {
+         sidebar.classList.toggle('active');
+         overlay.classList.toggle('active');
+         document.body.classList.toggle('sidebar-open');
+     }
+ 
+     // Toggle button click
+     if(toggleBtn) {
+         toggleBtn.addEventListener('click', function(e) {
+             e.stopPropagation();
+             toggleSidebar();
+         });
+     }
+ 
+     // Overlay click
+     if(overlay) {
+         overlay.addEventListener('click', function(e) {
+             toggleSidebar();
+         });
+     }
+ 
+     // Close when clicking outside on mobile
+     sidebar.addEventListener('click', function(e) {
+         e.stopPropagation();
+     });
+ 
+     // Close on resize (optional)
+     window.addEventListener('resize', function() {
+         if(window.innerWidth > 768 && sidebar.classList.contains('active')) {
+             toggleSidebar();
+         }
+     });
+ });
+ </script>
+ <script>
+    function handlePreselectedCountry() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const countryParam = urlParams.get('country');
+ 
+            if (countryParam) {
+                const country = decodeURIComponent(countryParam).split(':')[0].trim();
+                const checkbox = document.querySelector(`.countries-checkbox[value="${country}"]`);
+                
+ 
+                if (checkbox) {
+                    checkbox.checked = true;
+                    onFilterChange('countries', checkbox.id);
+                }
+            }
+        }
+</script>
+<script>
+    window.addEventListener('load', function () {
+          setTimeout(function () {
+              handlePreselectedCountry();
+          }, 1000); // 1000 milliseconds = 1 seconds
+      });
+</script>
+<script>
+    async function publishNews(id){
+        const dataToSave = {_id: id,
+                            level: 2,
+                            page: 'news'
+                            };
+        try {
+            const response = await fetch('/api/publish', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dataToSave),
+            });
+            
+            if (response.ok) {
+                const publishButton = document.getElementById(`publish-btn-${id}`);
+               
+                publishButton.innerText = "Published";
+                publishButton.classList.add("btn-success");
+                publishButton.classList.remove("btn-primary");
+                publishButton.disabled = true; // Disable the button after publishing
+            } else {
+                console.error('Failed to publish:', response.statusText);
+                alertPopup('Failed to publish the news. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alertPopup('An error occurred while publishing the news. Please try again.');
+        }
+    }
+</script>
+<script>
+
+    function openImageModal(src) {
+    
+        const modal = document.getElementById('imageModal');
+    
+        const modalImg = document.getElementById('modalImage');
+    
+        modal.style.display = 'flex';
+    
+        modalImg.src = src;
+    
+    }
+     
+    document.getElementById('closeModal').onclick = function() {
+    
+        document.getElementById('imageModal').style.display = 'none';
+    
+    }
+     
+    window.onclick = function(event) {
+    
+        const modal = document.getElementById('imageModal');
+    
+        if (event.target == modal) {
+    
+            modal.style.display = 'none';
+    
+        }
+    
+    }
+    </script>
+<script>
+    
+  function alertPopup(message) {
+    // Set the message in the modal
+    document.getElementById('alertModalMessage').textContent = message;
+
+    // Show the modal
+    const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+    alertModal.show();
+  }
+  
+
+</script>
+
+  </body>
+</html>
